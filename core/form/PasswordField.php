@@ -1,6 +1,6 @@
 <?php
 
-namespace juanignaso\phpmvc\form;
+namespace app\core\form;
 
 class PasswordField extends BaseField
 {

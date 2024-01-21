@@ -1,9 +1,9 @@
 <?php
 
-namespace juanignaso\phpmvc\form;
+namespace app\core\form;
 
-use juanignaso\phpmvc\Model;
-use juanignaso\phpmvc\form\InputField;
+use app\core\Model;
+use app\core\form\InputField;
 
 class Form
 {

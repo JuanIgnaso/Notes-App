@@ -1,13 +1,13 @@
 <?php
-namespace juanignaso\phpmvc;
+namespace app\core;
 
-use juanignaso\phpmvc\db\DataBase;
-use juanignaso\phpmvc\db\DBmodel;
+use app\core\db\DataBase;
+use app\core\db\DBmodel;
 
 /**
  * Class Application
  * 
- * @package juanignaso\phpmvc
+ * @package app\core
  */
 class Application
 {
@@ -16,7 +16,7 @@ class Application
 
     public string $layout = 'main';
 
-    public string $userClass;
+    // public string $userClass;
 
     public Router $router;
 
@@ -40,7 +40,7 @@ class Application
     {
         self::$ROOT_DIR = $rootPath;
         self::$app = $this;
-        $this->userClass = $config['userClass'];
+        // $this->userClass = $config['userClass'];
         $this->request = new Request();
         $this->response = new Response();
         $this->session = new Session();
@@ -49,15 +49,15 @@ class Application
         $this->db = new DataBase($config['db']);
 
         //Fetch user between page navigation, to access it in any point of the aplication
-        $primaryValue = $this->session->get('user');
-        if ($primaryValue) {
-            /*No deja llamar métodos no estáticos de forma estática*/
-            $c = new $this->userClass;
-            $primaryKey = $c->primaryKey();
-            $this->user = $c->findOne([$primaryKey => $primaryValue]);
-        } else {
-            $this->user = NULL;
-        }
+        // $primaryValue = $this->session->get('user');
+        // if ($primaryValue) {
+        //     /*No deja llamar métodos no estáticos de forma estática*/
+        //     $c = new $this->userClass;
+        //     $primaryKey = $c->primaryKey();
+        //     $this->user = $c->findOne([$primaryKey => $primaryValue]);
+        // } else {
+        //     $this->user = NULL;
+        // }
 
 
     }
@@ -89,31 +89,31 @@ class Application
     //     $this->controller = $controller;
     // }
 
-    public function login(UserModel $user)
-    {
-        $this->user = $user;
-        $primaryKey = $user->primaryKey();
-        $primaryValue = $user->{$primaryKey};
-        $this->session->set('user', $primaryValue);
-        return true;
-    }
+    // public function login(UserModel $user)
+    // {
+    //     $this->user = $user;
+    //     $primaryKey = $user->primaryKey();
+    //     $primaryValue = $user->{$primaryKey};
+    //     $this->session->set('user', $primaryValue);
+    //     return true;
+    // }
 
-    /**
-     * Borrar la sesión actual dentro de aplicación
-     */
-    public function logout()
-    {
-        $this->user = NULL;
-        $this->session->remove('user');
-    }
+    // /**
+    //  * Borrar la sesión actual dentro de aplicación
+    //  */
+    // public function logout()
+    // {
+    //     $this->user = NULL;
+    //     $this->session->remove('user');
+    // }
 
-    /**
-     * Determinar si el usuario está o no logueado en la web
-     */
-    public static function isGuest()
-    {
-        return !self::$app->user;
-    }
+    // /**
+    //  * Determinar si el usuario está o no logueado en la web
+    //  */
+    // public static function isGuest()
+    // {
+    //     return !self::$app->user;
+    // }
 
 }
 

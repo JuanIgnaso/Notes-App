@@ -1,8 +1,8 @@
 <?php
 
-namespace juanignaso\phpmvc\db;
+namespace app\core\db;
 
-use juanignaso\phpmvc\Application;
+use app\core\Application;
 
 class DataBase
 {
