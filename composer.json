@@ -1,0 +1,19 @@
+{
+    "name": "juanignaso/notes-app",
+    "description": "simple mvc notes app",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\":"./"
+        }
+    },
+    "authors": [
+        {
+            "name": "JuanIgnaso",
+            "email": "104755375+JuanIgnaso@users.noreply.github.com"
+        }
+    ]
+}
