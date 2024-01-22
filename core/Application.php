@@ -3,6 +3,7 @@ namespace app\core;
 
 use app\core\db\DataBase;
 use app\core\db\DBmodel;
+use app\models\Usuario;
 
 /**
  * Class Application
@@ -16,7 +17,7 @@ class Application
 
     public string $layout = 'main';
 
-    // public string $userClass;
+    public string $userClass;
 
     public Router $router;
 
@@ -31,7 +32,7 @@ class Application
     public static Application $app;
 
     public ?Controller $controller = null;
-    public ?UserModel $user;
+    public ?Usuario $user;
 
     public View $view;
 
@@ -49,15 +50,15 @@ class Application
         $this->db = new DataBase($config['db']);
 
         //Fetch user between page navigation, to access it in any point of the aplication
-        // $primaryValue = $this->session->get('user');
-        // if ($primaryValue) {
-        //     /*No deja llamar métodos no estáticos de forma estática*/
-        //     $c = new $this->userClass;
-        //     $primaryKey = $c->primaryKey();
-        //     $this->user = $c->findOne([$primaryKey => $primaryValue]);
-        // } else {
-        //     $this->user = NULL;
-        // }
+        $primaryValue = $this->session->get('user');
+        if ($primaryValue) {
+            /*No deja llamar métodos no estáticos de forma estática*/
+            $c = new $this->userClass;
+            $primaryKey = $c->primaryKey();
+            $this->user = $c->findOne([$primaryKey => $primaryValue]);
+        } else {
+            $this->user = NULL;
+        }
 
 
     }
@@ -89,14 +90,14 @@ class Application
     //     $this->controller = $controller;
     // }
 
-    // public function login(UserModel $user)
-    // {
-    //     $this->user = $user;
-    //     $primaryKey = $user->primaryKey();
-    //     $primaryValue = $user->{$primaryKey};
-    //     $this->session->set('user', $primaryValue);
-    //     return true;
-    // }
+    public function login(Usuario $user)
+    {
+        $this->user = $user;
+        $primaryKey = $user->primaryKey();
+        $primaryValue = $user->{$primaryKey};
+        $this->session->set('user', $primaryValue);
+        return true;
+    }
 
     // /**
     //  * Borrar la sesión actual dentro de aplicación
@@ -110,10 +111,10 @@ class Application
     // /**
     //  * Determinar si el usuario está o no logueado en la web
     //  */
-    // public static function isGuest()
-    // {
-    //     return !self::$app->user;
-    // }
+    public static function isGuest()
+    {
+        return !self::$app->user;
+    }
 
 }
 

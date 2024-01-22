@@ -19,6 +19,15 @@ use app\core\Application;
 <body>
 
     <div class="container">
+        <?php
+        if (Application::$app->session->getFlash('success')) {
+            ; ?>
+            <p>
+                <?php echo Application::$app->session->getFlash('success'); ?>
+            </p>
+            <?php
+        }
+        ?>
         {{content}}
     </div>
 
