@@ -23,8 +23,10 @@ abstract class BaseField
     {
         return sprintf('
             <div class="form_group">
-                <label><strong>%s</strong></label>
+                <label>%s</label>
+                <div class="input-group">
                 %s
+                </div>
                 <p class="input_error">%s</p>
             </div>
         ',
