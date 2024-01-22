@@ -102,11 +102,11 @@ class Application
     // /**
     //  * Borrar la sesión actual dentro de aplicación
     //  */
-    // public function logout()
-    // {
-    //     $this->user = NULL;
-    //     $this->session->remove('user');
-    // }
+    public function logout()
+    {
+        $this->user = NULL;
+        $this->session->remove('user');
+    }
 
     // /**
     //  * Determinar si el usuario está o no logueado en la web

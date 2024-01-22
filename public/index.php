@@ -32,4 +32,6 @@ $app->router->post('/register', [app\controllers\AuthController::class, 'registe
 $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
 
+#LOGOUT
+$app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 $app->run();

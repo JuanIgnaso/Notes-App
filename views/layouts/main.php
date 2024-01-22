@@ -17,6 +17,16 @@ use app\core\Application;
 </head>
 
 <body>
+    <?php
+    if (!Application::isGuest()) {
+        ?>
+        <span>
+            <?php echo Application::$app->user->getUserName(); ?>
+            <a href="/logout"> Cerrar sesión</a>
+        </span>
+        <?php
+    }
+    ?>
 
     <div class="container">
         <?php
