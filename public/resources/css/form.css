@@ -71,7 +71,7 @@ input[type="submit"]{
     box-shadow: inset black 0px 0px 60px -12px; 
 }
 
-.loginRegister-form{
+form{
     background-image: url('../img/paper_texture.jpg');
     padding:2em;
     position: relative;
@@ -102,7 +102,7 @@ input[type="submit"]{
         width: 90%;
     }
 
-    .loginRegister-form{
+    form{
         width: 95%;
     }
 }

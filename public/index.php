@@ -1,4 +1,6 @@
 <?php
+use app\models\Usuario;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 //Cargar variables de entorno
@@ -9,7 +11,7 @@ use app\core\Application;
 
 //Configuraciones
 $config = [
-    // 'userClass' => Usuario::class,
+    'userClass' => Usuario::class,
     // //Configuración de la base de datos
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
@@ -23,5 +25,9 @@ $app = new Application(dirname(__DIR__), $config);
 ###AQUÍ SE DEFINEN LAS RUTAS###
 $app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
 $app->router->get('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
+
+###LOGIN/REGISTER
+$app->router->get('/register', [app\controllers\AuthController::class, 'register']);
+$app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 
 $app->run();
