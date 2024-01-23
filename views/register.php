@@ -1,5 +1,6 @@
 <?php
 use app\core\Application;
+use app\core\Cookie;
 
 $this->title = 'Registrarse';
 ?>
@@ -12,6 +13,7 @@ $this->title = 'Registrarse';
         <?php echo $form->field($model, 'email'); ?>
         <?php echo $form->field($model, 'password')->passwordField(); ?>
         <?php echo $form->field($model, 'passwordConfirm')->passwordField(); ?>
+
         <input type="submit" value="Registrar Cuenta">
         <?php app\core\form\Form::end(); ?>
     </div>

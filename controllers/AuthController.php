@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\Cookie;
 use app\core\Request;
 use app\core\Response;
 use app\models\LoginForm;
@@ -17,28 +18,39 @@ class AuthController extends Controller
 
         $userModel = new Usuario();
 
+
+
         if ($request->isPost()) {
             $userModel->loadData($request->getBody());
             if ($userModel->validate() && $userModel->save()) {
                 Application::$app->session->setFlash('success', 'Usuario registrado!');
                 Application::$app->response->redirect('/');
             }
+
         }
+
 
         return $this->render(
             'register',
-            ['model' => $userModel]
+            [
+                'model' => $userModel,
+
+            ]
         );
     }
 
     public function login(Request $request, Response $response)
     {
         $this->setLayout('loginRegisterForm');
-
+        $body = $request->getBody();
         $formModel = new LoginForm();
+        $cookie = new Cookie();
 
         if ($request->isPost()) {
             $formModel->loadData($request->getBody());
+            if (isset($body['recordar'])) {
+                $cookie->create('test', $body['prueba'], time() + (86400 * 30));
+            }
             if ($formModel->validate() && $formModel->login()) {
                 $response->redirect('/');
             }
@@ -46,7 +58,10 @@ class AuthController extends Controller
 
         return $this->render(
             'login',
-            ['model' => $formModel]
+            [
+                'model' => $formModel,
+                'cookie' => $cookie,
+            ]
         );
     }
 

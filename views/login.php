@@ -10,6 +10,11 @@ $this->title = 'Login';
         <i class="fa-solid fa-map-pin login-pin"></i>
         <?php echo $form->field($model, 'email'); ?>
         <?php echo $form->field($model, 'password')->passwordField(); ?>
+        <label for="recordar">Recordar</label>
+        <input type="checkbox" name="recordar" id="recordar"
+            value="<?php echo $cookie->exists('test') ? 'checked' : ''; ?>">
+        <input type="text" name="prueba" id="prueba"
+            value="<?php echo $cookie->exists('test') ? $cookie->get('test') : ''; ?> ">
         <input type="submit" value="Registrar Cuenta">
         <?php app\core\form\Form::end(); ?>
     </div>

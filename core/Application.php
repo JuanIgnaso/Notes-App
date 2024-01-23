@@ -36,6 +36,8 @@ class Application
 
     public View $view;
 
+    public Cookie $cookie;
+
 
     public function __construct($rootPath, array $config)
     {
@@ -47,6 +49,7 @@ class Application
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
         $this->view = new View();
+        $this->cookie = new Cookie();
         $this->db = new DataBase($config['db']);
 
         //Fetch user between page navigation, to access it in any point of the aplication
