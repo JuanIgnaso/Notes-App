@@ -48,10 +48,13 @@ class AuthController extends Controller
 
         if ($request->isPost()) {
             $formModel->loadData($request->getBody());
-            if (isset($body['recordar'])) {
-                $cookie->create('test', $body['prueba'], time() + (86400 * 30));
-            }
+
             if ($formModel->validate() && $formModel->login()) {
+                if (isset($body['recordar'])) {
+                    $cookie->create('test', $body['prueba'], time() + (86400 * 30));
+                } else {
+                    $cookie->delete('test');
+                }
                 $response->redirect('/');
             }
         }
@@ -61,6 +64,7 @@ class AuthController extends Controller
             [
                 'model' => $formModel,
                 'cookie' => $cookie,
+                'body' => $body,
             ]
         );
     }
