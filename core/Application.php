@@ -116,7 +116,7 @@ class Application
     //  */
     public static function isGuest()
     {
-        return !self::$app->user;
+        return self::$app->user == null;
     }
 
 }

@@ -32,15 +32,22 @@ use app\core\Application;
         <?php
         if (Application::$app->session->getFlash('success')) {
             ; ?>
-            <p>
-                <?php echo Application::$app->session->getFlash('success'); ?>
-            </p>
+            <div class="alert">
+                <div class="background">
+                    <p>
+                        <?php echo Application::$app->session->getFlash('success'); ?>
+                    </p>
+                </div>
+            </div>
             <?php
         }
         ?>
+
+
         {{content}}
     </div>
 
-</body>
-
-</html>
+    <!-- FOOTER -->
+    <?php
+    include 'webFooter.php';
+    ?>

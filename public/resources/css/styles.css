@@ -32,6 +32,94 @@ h1,h2,h3,h4,label{
     font-style: normal;
 }
 
+/*  ALERTA ------------------ */
+
+.alert{
+    background-image:url('../img/paper_texture.jpg');
+    background-size: 100%;
+    text-align: center;
+}
+
+.background{
+    padding:0.5em;
+    background-color:rgba(0, 100, 0,0.35);
+    color:white;
+}
+
+/* -------------------------- */
+
+/* FOOTER ------------------ */
+#footerWeb{
+    border-top:1px solid rgb(0,0,0);
+    margin: auto;
+    margin-top:2em;
+    padding: 1em;
+}
+
+#footer_about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0.75em;
+}
+
+#footer_about i{
+    font-size: 1.35em;
+    color:rgb(0,0,0);
+}
+
+#footer_about h3{
+    font-size: 2em;
+}
+
+#footer-contacts{
+    display: flex;
+    gap: 0.75em;
+    justify-content: center;
+}
+
+/*   --------------   */
+
+#error{
+    width: 70%;
+    aspect-ratio: 2/1;
+    background-image: url('../img/error.png');
+    background-repeat: no-repeat; 
+    background-size: 100%;
+    margin:auto;
+    position:relative;
+}
+.posterTape{
+    background-color: lightgrey;
+    width: 7%;
+    aspect-ratio: 1/2;
+    position: absolute;
+}
+
+#error .posterTape:nth-of-type(1){
+    left:0;
+    rotate:40deg;
+    top:-5%;
+}
+
+#error .posterTape:nth-of-type(2){
+    right:0;
+    top: -5%;
+    rotate:-40deg;
+}
+
+#error .posterTape:nth-of-type(3){
+    right:0;
+    bottom: -5%;
+    rotate:40deg;
+}
+
+#error .posterTape:nth-of-type(4){
+    left:0;
+    bottom:-5%;
+    rotate:-40deg;
+}
+
 .tituloPagina{
     text-align: center;
 }
@@ -226,6 +314,10 @@ option{
 
     #notes_container{
         grid-template-columns: repeat(1,1fr);
+    }
+
+    #error{
+        width: 100%;
     }
 }
 

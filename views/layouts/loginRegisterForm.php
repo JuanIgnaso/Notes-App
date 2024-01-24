@@ -23,6 +23,7 @@ use app\core\Application;
         {{content}}
     </div>
 
-</body>
-
-</html>
+    <!-- FOOTER -->
+    <?php
+    include 'webFooter.php';
+    ?>

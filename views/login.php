@@ -8,19 +8,32 @@ $this->title = 'Login';
     <div class="main-login-register-inner">
         <?php $form = app\core\form\Form::begin('', 'post'); ?>
         <i class="fa-solid fa-map-pin login-pin"></i>
-        <?php echo $form->field($model, 'email'); ?>
+        <div class="formGroup">
+            <label>Correo electrónico</label>
+            <div class="input-group">
+                <input type="email" id="email" name="email" value="<?php
+                if (isset($_COOKIE['email'])) {
+                    $cookie->get('email');
+                }
+                if (isset($model->email)) {
+                    echo $model->email;
+                } else {
+                    echo '';
+                }
+
+                ?>"><i class="fa-solid fa-pen-fancy pen"></i>
+            </div>
+            <p class="input_error">
+                <?php if (isset($errors['email'])) {
+                    echo ($errors['email'][0]);
+                } ?>
+            </p>
+        </div>
         <?php echo $form->field($model, 'password')->passwordField(); ?>
         <label for="recordar">Recordar</label>
-        <input type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['test']) ? 'checked' : ''; ?>>
-        <input type="text" name="prueba" id="prueba"
-            value="<?php echo isset($_COOKIE['test']) ? $cookie->get('test') : ''; ?> ">
+        <input type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
         <input type="submit" value="Iniciar sesión">
         <?php app\core\form\Form::end(); ?>
     </div>
 
 </main>
-<?php
-echo '<pre>';
-var_dump($body);
-echo '</pre>';
-?>
