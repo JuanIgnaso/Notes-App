@@ -37,6 +37,23 @@ h1,h2,h3,h4,label{
     background: url('../img/paper_texture.jpg');
     background-size: 100%;
     padding:0.5em;
+    width: 25%;
+    box-shadow: 0px 0px 4px 2px rgb(0,0,0);
+
+    ol{
+        display: flex;
+        gap: 0.25em;
+        align-items: center;
+    }
+
+    i,a{
+        color:black;
+        text-decoration: none;
+    }
+
+    .fa-right-from-bracket{
+        color:crimson;
+    }
 }
 /*----------------------------*/
 
@@ -69,16 +86,17 @@ h1,h2,h3,h4,label{
     flex-direction: column;
     align-items: center;
     gap:0.75em;
+
+    i{
+        font-size: 1.35em;
+        color:rgb(0,0,0);
+    }
+
+    h3{
+        font-size: 2em;
+    }
 }
 
-#footer_about i{
-    font-size: 1.35em;
-    color:rgb(0,0,0);
-}
-
-#footer_about h3{
-    font-size: 2em;
-}
 
 #footer-contacts{
     display: flex;
@@ -96,36 +114,38 @@ h1,h2,h3,h4,label{
     background-size: 100%;
     margin:auto;
     position:relative;
+
+    .posterTape:nth-of-type(1){
+        left:0;
+        rotate:40deg;
+        top:-5%;
+    }
+
+    .posterTape:nth-of-type(2){
+        right:0;
+        top: -5%;
+        rotate:-40deg;
+    }
+
+    .posterTape:nth-of-type(3){
+        right:0;
+        bottom: -5%;
+        rotate:40deg;
+    }
+
+    .posterTape:nth-of-type(4){
+        left:0;
+        bottom:-5%;
+        rotate:-40deg;
+    }
 }
+
+
 .posterTape{
     background-color: lightgrey;
     width: 7%;
     aspect-ratio: 1/2;
     position: absolute;
-}
-
-#error .posterTape:nth-of-type(1){
-    left:0;
-    rotate:40deg;
-    top:-5%;
-}
-
-#error .posterTape:nth-of-type(2){
-    right:0;
-    top: -5%;
-    rotate:-40deg;
-}
-
-#error .posterTape:nth-of-type(3){
-    right:0;
-    bottom: -5%;
-    rotate:40deg;
-}
-
-#error .posterTape:nth-of-type(4){
-    left:0;
-    bottom:-5%;
-    rotate:-40deg;
 }
 
 .tituloPagina{
@@ -154,16 +174,14 @@ h3{
     box-shadow: 0px 0px 6px 2px rgb(0,0,0);
     padding:0.5em;
     z-index: 20;
-}
 
-
-#sidebarMenu h3{
-    text-decoration: underline;
-}
-
-#sidebarMenu a{
-    text-decoration: none;
-    color:#000;
+    h3{
+        text-decoration: underline;
+    }
+    a{
+        text-decoration: none;
+        color:#000;
+    }
 }
 
 #mobileMenu{
@@ -181,14 +199,14 @@ h3{
 #abrirMenu{
     background-color:unset;
     border:unset;
-}
 
-#abrirMenu i{
-    display: inline;
-}
+    i{
+        display: inline;
+    }
 
-#sidebarMenu a:hover + i{
-    display: inline;
+    a:hover + i{
+        display: inline;
+    }
 }
 
 #main_container{
@@ -207,16 +225,16 @@ h3{
     box-shadow: inset black 0px 0px 60px -12px;
     /* background-repeat: no-repeat; */
     /* background-attachment: fixed; */
-}
 
-#container_inner header{
-    text-align: center;
-    margin-bottom: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:1em;
-    margin-bottom: 3em;
+    header{
+        text-align: center;
+        margin-bottom: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:1em;
+        margin-bottom: 3em;
+    }
 }
 
 #estados{
@@ -226,6 +244,20 @@ h3{
     align-items: center;
     gap:1em;
     justify-content: center;
+
+    li span:hover{
+        cursor:pointer;
+        box-shadow: 0px 0px 5px 2px rgb(0,0,0);
+    }
+
+    li span:hover > .pin{
+        top:-15%;
+    }
+
+    li span{
+        padding:0.55em;
+        position: relative;
+    }
 }
 
 .pin{
@@ -239,14 +271,6 @@ h3{
   transition: 0.25s;
 }
 
-#estados li span:hover{
-    cursor:pointer;
-    box-shadow: 0px 0px 5px 2px rgb(0,0,0);
-}
-
-#estados li span:hover > .pin{
-    top:-15%;
-}
 
 select{
     background-color: unset;
@@ -256,11 +280,6 @@ select{
 
 option{
     font-family: "Patrick Hand","Playpen Sans", cursive;
-}
-
-#estados li span{
-    padding:0.55em;
-    position: relative;
 }
 
 #notes_container{
@@ -314,6 +333,12 @@ option{
     }
 }
 
+@media screen and (max-width: 700px){
+    #menuUsuario{
+        width: 50%;
+    }
+}
+
 @media screen and (max-width: 500px) {
 
     #main_container{
@@ -341,6 +366,14 @@ option{
     padding: 0.75em;
     border: 2px solid rgba(177, 177, 177, 1);
     transition: 0.5s;
+
+    .actions ol{
+        justify-content: end;
+        display: flex;
+        align-items: center;
+        margin:0;
+        gap: 1em;
+    }
 }
 
 .note:hover{
@@ -354,14 +387,6 @@ option{
     padding: 0.75em;
     right: 0px;
     font-size: 1.1em;
-}
-
-.note .actions ol{
-    justify-content: end;
-    display: flex;
-    align-items: center;
-    margin:0;
-    gap: 1em;
 }
 
 .noteContent{

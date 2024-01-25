@@ -1,3 +1,8 @@
+<?php
+use app\core\Application;
+
+$this->title = 'Mis Notas';
+?>
 <h1 style="text-align: center;">Mis Tareas Pendientes</h1>
 
 <aside id="sidebarMenu">
@@ -38,6 +43,12 @@
                 <li><span class="no_started" aria-label="mostrar todas"><i
                             class="fa-solid fa-thumbtack pin"></i>Todas</span></li>
             </ol>
+            <h2>Filtrar por Título</h2>
+
+            <form autocomplete="off" action="/getNotesByTitle" method="post">
+
+            </form>
+
         </header>
         <section id="notes_container">
             <div class="note paused">
