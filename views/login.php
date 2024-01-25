@@ -6,6 +6,7 @@ $this->title = 'Login';
 <h1 class="tituloPagina">Iniciar Sesión</h1>
 <main class="main-login-register">
     <div class="main-login-register-inner">
+
         <?php $form = app\core\form\Form::begin('', 'post'); ?>
         <i class="fa-solid fa-map-pin login-pin"></i>
         <div class="formGroup">
@@ -38,6 +39,7 @@ $this->title = 'Login';
         <span id="capsOn"><strong></strong></span>
         <script src="/resources/js/isCapsOn.js"></script> <!-- Muestra mensaje cuando las maýusc están activadas -->
         <?php app\core\form\Form::end(); ?>
+
     </div>
 
 </main>

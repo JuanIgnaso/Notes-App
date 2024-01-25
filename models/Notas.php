@@ -1,16 +1,24 @@
 <?php
 namespace app\models;
 
+use app\core\Application;
 use app\core\db\DBmodel;
 
 class Notas extends DBmodel
 {
 
+    public string $id;
     public string $titulo = '';
     public string $descripcion = '';
-    public string $estado;
-    public string $importante;
+    public int $estado = 1;
+    public int $importante = 0;
     public string $usuario;
+
+    public function save()
+    {
+        $this->usuario = Application::$app->user->id;
+        return parent::save();
+    }
 
     public function tableName(): string
     {

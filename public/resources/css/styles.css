@@ -234,6 +234,18 @@ h3{
         align-items: center;
         gap:1em;
         margin-bottom: 3em;
+
+        label{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    form{
+        background-image: url('../img/paper_texture.jpg');
+        padding:2em;
+        position: relative;
+        background-image: 100%;
     }
 }
 

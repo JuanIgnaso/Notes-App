@@ -5,6 +5,8 @@ $this->title = 'Mis Notas';
 ?>
 <h1 style="text-align: center;">Mis Tareas Pendientes</h1>
 
+
+
 <aside id="sidebarMenu">
     <div id="desktop">
         <h3>Menú de Usuario</h3>
@@ -30,6 +32,22 @@ $this->title = 'Mis Notas';
 <main id="main_container">
     <div id="container_inner">
         <header>
+            <!-- var_dump(Application::$app->user->id); -->
+            <form action="/addNote" method="post">
+                <label>
+                    Titulo
+                    <input type="text" name="titulo" id="titulo">
+                    <p></p>
+                </label>
+                <label>
+                    Descripción
+                    <input type="text" name="descripcion" id="descripcion">
+                    <p></p>
+                </label>
+                <input type="submit" value="Crear" id="crear">
+            </form>
+
+
             <h2>Filtrar por estados</h2>
             <ol id="estados">
                 <li><span class="no_started" aria-label="filtrar sin empezar"><i
@@ -45,8 +63,9 @@ $this->title = 'Mis Notas';
             </ol>
             <h2>Filtrar por Título</h2>
 
-            <form autocomplete="off" action="/getNotesByTitle" method="post">
-
+            <form action="/getByTitle" method="post">
+                <input type="text" name="titulo" id="titulo">
+                <input type="submit" value="Buscar" id="buscar">
             </form>
 
         </header>

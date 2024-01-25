@@ -34,4 +34,9 @@ $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
 
 #LOGOUT
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
+
+###AÑADIR NOTAS
+$app->router->post('/addNote', [app\controllers\NotesController::class, 'createNote']);
+$app->router->get('/addNote', [app\controllers\NotesController::class, 'createNote']);
+
 $app->run();
