@@ -20,10 +20,14 @@ use app\core\Application;
     <?php
     if (!Application::isGuest()) {
         ?>
-        <span>
-            <?php echo Application::$app->user->getUserName(); ?>
-            <a href="/logout"> Cerrar sesión</a>
-        </span>
+        <div id="menuUsuario">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>
+                <?php echo Application::$app->user->getUserName(); ?>
+                <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </span>
+        </div>
+
         <?php
     }
     ?>

@@ -11,7 +11,7 @@ $this->title = 'Login';
         <div class="formGroup">
             <label>Correo electrónico</label>
             <div class="input-group">
-                <input type="email" id="email" name="email" value="<?php
+                <input type="text" id="email" name="email" value="<?php
                 if (isset($_COOKIE['email'])) {
                     $cookie->get('email');
                 }
@@ -24,15 +24,19 @@ $this->title = 'Login';
                 ?>"><i class="fa-solid fa-pen-fancy pen"></i>
             </div>
             <p class="input_error">
-                <?php if (isset($errors['email'])) {
-                    echo ($errors['email'][0]);
+                <?php if (isset($model->errors['email'])) {
+                    echo ($model->errors['email'][0]);
                 } ?>
             </p>
         </div>
         <?php echo $form->field($model, 'password')->passwordField(); ?>
-        <label for="recordar">Recordar</label>
-        <input type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
+        <div class="formGroup">
+            <label for="recordar">Recordar</label>
+            <input type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
+        </div>
         <input type="submit" value="Iniciar sesión">
+        <span id="capsOn"><strong></strong></span>
+        <script src="/resources/js/isCapsOn.js"></script> <!-- Muestra mensaje cuando las maýusc están activadas -->
         <?php app\core\form\Form::end(); ?>
     </div>
 

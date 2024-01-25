@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Mis Tareas Pendientes</h1>
 
-<aside id="menuUsuario">
+<aside id="sidebarMenu">
     <div id="desktop">
         <h3>Menú de Usuario</h3>
         <ol>
@@ -20,23 +20,7 @@
             </ol>
         </div>
     </div>
-    <script>
-
-        let menu = document.querySelector('#mobileMenu');
-
-
-        function openMobileMenu() {
-            menu.classList.add('mostrar');
-        }
-
-        window.onclick = function (event) {
-            if (!event.target.matches('.open')) {
-                if (menu.classList.contains('mostrar')) {
-                    menu.classList.remove('mostrar');
-                }
-            }
-        }
-    </script>
+    <script src="./resources/js/openSidebarMenu.js"></script>
 </aside>
 <main id="main_container">
     <div id="container_inner">

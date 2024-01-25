@@ -32,6 +32,14 @@ h1,h2,h3,h4,label{
     font-style: normal;
 }
 
+/*  MENU USUARIO--------------*/
+#menuUsuario{
+    background: url('../img/paper_texture.jpg');
+    background-size: 100%;
+    padding:0.5em;
+}
+/*----------------------------*/
+
 /*  ALERTA ------------------ */
 
 .alert{
@@ -136,7 +144,7 @@ h3{
     font-size: 1.5em;
 }
 
-#menuUsuario{
+#sidebarMenu{
     background-color: white;
     color:crimson;
     position: fixed;
@@ -149,11 +157,11 @@ h3{
 }
 
 
-#menuUsuario h3{
+#sidebarMenu h3{
     text-decoration: underline;
 }
 
-#menuUsuario a{
+#sidebarMenu a{
     text-decoration: none;
     color:#000;
 }
@@ -166,7 +174,7 @@ h3{
     display: block !important;
 }
 
-#menuUsuario i{
+#sidebarMenu i{
     display: none;
 }
 
@@ -179,7 +187,7 @@ h3{
     display: inline;
 }
 
-#menuUsuario a:hover + i{
+#sidebarMenu a:hover + i{
     display: inline;
 }
 
@@ -299,7 +307,7 @@ option{
     }
 
 
-    #menuUsuario{
+    #sidebarMenu{
         top:0;
         margin-top: 0.5em;
         width: auto;

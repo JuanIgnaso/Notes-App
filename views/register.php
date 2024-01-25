@@ -13,8 +13,9 @@ $this->title = 'Registrarse';
         <?php echo $form->field($model, 'email'); ?>
         <?php echo $form->field($model, 'password')->passwordField(); ?>
         <?php echo $form->field($model, 'passwordConfirm')->passwordField(); ?>
-
+        <span id="capsOn"><strong></strong></span>
         <input type="submit" value="Registrar Cuenta">
+        <script src="/resources/js/isCapsOn.js"></script> <!-- Muestra mensaje cuando las maýusc están activadas -->
         <?php app\core\form\Form::end(); ?>
     </div>
 </main>
