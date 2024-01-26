@@ -24,9 +24,22 @@ use app\core\Application;
         if (Application::$app->session->getFlash('success')) {
             ; ?>
             <div class="alert">
-                <div class="background">
+                <div class="background success">
                     <p>
                         <?php echo Application::$app->session->getFlash('success'); ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
+        <?php
+        if (Application::$app->session->getFlash('error')) {
+            ; ?>
+            <div class="alert">
+                <div class="background danger">
+                    <p>
+                        <?php echo Application::$app->session->getFlash('error'); ?>
                     </p>
                 </div>
             </div>

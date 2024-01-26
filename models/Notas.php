@@ -8,8 +8,8 @@ class Notas extends DBmodel
 {
 
     public string $id;
-    public string $titulo = '';
-    public string $descripcion = '';
+    public string $titulo;
+    public string $descripcion;
     public int $estado = 1;
     public int $importante = 0;
     public string $usuario;
@@ -18,6 +18,16 @@ class Notas extends DBmodel
     {
         $this->usuario = Application::$app->user->id;
         return parent::save();
+    }
+
+
+    public function getUserNotes()
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM Notas LEFT JOIN estado ON $tableName.estado = estado.id WHERE usuario=:id ORDER BY 1");
+        $statement->bindValue(":id", Application::$app->user->id);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function tableName(): string
@@ -38,7 +48,7 @@ class Notas extends DBmodel
     public function rules(): array
     {
         return [
-            'titulo' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 70]],
+            'titulo' => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class], [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 70]],
             'descripcion' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 450]],
             'estado' => [self::RULE_REQUIRED],
         ];

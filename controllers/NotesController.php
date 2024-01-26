@@ -21,9 +21,11 @@ class NotesController extends Controller
     public function userNotes(Request $request)
     {
         $model = new Notas();
+        $misNotas = $model->getUserNotes();
 
         return $this->render('misNotas', [
             'model' => $model,
+            'notas' => $misNotas,
         ]);
     }
 
@@ -32,10 +34,12 @@ class NotesController extends Controller
         $model = new Notas();
         if ($request->isPost()) {
             $model->loadData($request->getBody());
-            if ($model->save()) {
+            if ($model->validate() && $model->save()) {
                 Application::$app->session->setFlash('success', 'Nueva nota ha sido creada');
-                Application::$app->response->redirect('/misNotas');
+            } else {
+                Application::$app->session->setFlash('error', 'Error: ' . implode(', ', $model->errors));
             }
+            Application::$app->response->redirect('/misNotas');
         }
     }
 

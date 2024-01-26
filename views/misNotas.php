@@ -13,7 +13,7 @@ $this->title = 'Mis Notas';
         <ol>
             <li><a href="/">Inicio </a><i class="fa-solid fa-hand-point-left"></i></li>
             <li><a href="/perfil">Perfil </a><i class="fa-solid fa-hand-point-left"></i></li>
-            <li><a href="/login.html">Cerrar Sesión </a><i class="fa-solid fa-hand-point-left"></i></li>
+            <li><a href="/logout">Cerrar Sesión </a><i class="fa-solid fa-hand-point-left"></i></li>
         </ol>
     </div>
     <div id="phone">
@@ -23,7 +23,7 @@ $this->title = 'Mis Notas';
             <ol>
                 <li><a href="/">Inicio </a><i class="fa-solid fa-hand-point-left"></i></li>
                 <li><a href="/perfil">Perfil </a><i class="fa-solid fa-hand-point-left"></i></li>
-                <li><a href="/login.html">Cerrar Sesión </a><i class="fa-solid fa-hand-point-left"></i></li>
+                <li><a href="/logout">Cerrar Sesión </a><i class="fa-solid fa-hand-point-left"></i></li>
             </ol>
         </div>
     </div>
@@ -34,15 +34,15 @@ $this->title = 'Mis Notas';
         <header>
             <!-- var_dump(Application::$app->user->id); -->
             <form action="/addNote" method="post">
+                <i class="fa-solid fa-thumbtack pin"></i>
+                <h2>Crear una Nota nueva</h2>
                 <label>
                     Titulo
                     <input type="text" name="titulo" id="titulo">
-                    <p></p>
                 </label>
                 <label>
                     Descripción
                     <input type="text" name="descripcion" id="descripcion">
-                    <p></p>
                 </label>
                 <input type="submit" value="Crear" id="crear">
             </form>
@@ -64,260 +64,58 @@ $this->title = 'Mis Notas';
             <h2>Filtrar por Título</h2>
 
             <form action="/getByTitle" method="post">
+                <i class="fa-solid fa-thumbtack pin"></i>
                 <input type="text" name="titulo" id="titulo">
                 <input type="submit" value="Buscar" id="buscar">
             </form>
 
         </header>
-        <section id="notes_container">
-            <div class="note paused">
-                <div class="tape">
-                    <div class="tape_shade"></div>
+        <?php
+        if (count($notas) != 0) {
+            ?>
+            <section id="notes_container">
+                <?php
+                foreach ($notas as $nota) {
+                    ?>
+                    <div class="note <?php echo $nota['clase']; ?>">
+                        <input type="hidden" name="nota<?php echo $nota['id']; ?>" value="<?php echo $nota['id']; ?>">
+                        <div class="tape">
+                            <div class="tape_shade"></div>
+                        </div>
+                        <div class="noteContent">
+                            <h3>
+                                <?php echo $nota['titulo']; ?>
+                            </h3>
+                            <p>
+                                <?php echo $nota['descripcion']; ?>
+                            </p>
+                        </div>
+                        <footer class="actions">
+                            <ol>
+                                <li><span>!</span></li>
+                                <li><span><strong>
+                                            <?php echo $nota['estado']; ?>
+                                        </strong></span></li>
+                                <li><i class="fa-solid fa-wrench"></i></li>
+                                <li><span>X</span></li>
+                            </ol>
+                        </footer>
+                    </div>
+                    <?php
+                }
+                ?>
+            </section>
+        <?php
+        } else {
+            ?>
+            <div id="noNotes">
+                <div class="danger">
+                    <h3>No tienes ninguna nota creada en este momento</h3>
                 </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
             </div>
-            <div class="note in_progress">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Progreso</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note finished">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>Terminada</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas. Cras
-                        sollicitudin blandit elit, nec gravida libero maximus ac placerat. </p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-            <div class="note">
-                <div class="tape">
-                    <div class="tape_shade"></div>
-                </div>
-                <div class="noteContent">
-                    <h3>Descripción de la tarea hola hola</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales metus vitae eleifend
-                        pretium. Aliquam erat volutpat. Ut scelerisque turpis massa, non rhoncus tortor laoreet eget.
-                        Phasellus dapibus eros et tortor consectetur finibus. Donec tincidunt eu felis in egestas.</p>
-                </div>
-                <footer class="actions">
-                    <ol>
-                        <li><span>!</span></li>
-                        <li><span><strong>En Pausa</strong></span></li>
-                        <li><i class="fa-solid fa-wrench"></i></li>
-                        <li><span>X</span></li>
-                    </ol>
-                </footer>
-            </div>
-        </section>
+            <?php
+        }
+        ?>
+
     </div>
 </main>
