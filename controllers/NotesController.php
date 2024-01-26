@@ -43,6 +43,21 @@ class NotesController extends Controller
         }
     }
 
+    public function borrarNota(Request $request)
+    {
+        $model = new Notas();
+        if ($request->isPost()) {
+            $model->loadData($request->getBody());
+            if ($model->delete()) {
+                Application::$app->response->setStatusCode(200);
+                exit;
+            } else {
+                Application::$app->response->setStatusCode(400);
+                exit;
+            }
+        }
+    }
+
     public function inicio(Request $request)
     {
         return $this->render('home');

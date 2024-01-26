@@ -97,15 +97,34 @@ $this->title = 'Mis Notas';
                                             <?php echo $nota['estado']; ?>
                                         </strong></span></li>
                                 <li><i class="fa-solid fa-wrench"></i></li>
-                                <li><span>X</span></li>
+                                <li><span onclick="deleteNote(<?php echo $nota['id']; ?>)">X</span></li>
                             </ol>
                         </footer>
                     </div>
                     <?php
                 }
                 ?>
+                <script>
+                    function deleteNote(id) {
+                        $.ajax({
+                            url: '/borrarNota',
+                            type: 'POST',
+                            data: {
+                                id: id,
+                            },
+                            success: function (response) {
+                                location.reload();
+                                console.log('Elemento borrado');
+                            },
+                            error: function (error) {
+                                location.reload();
+                                console.log('error al borrar');
+                            }
+                        })
+                    }
+                </script>
             </section>
-        <?php
+            <?php
         } else {
             ?>
             <div id="noNotes">

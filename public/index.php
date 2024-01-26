@@ -38,5 +38,8 @@ $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 ###AÑADIR NOTAS
 $app->router->post('/addNote', [app\controllers\NotesController::class, 'createNote']);
 $app->router->get('/addNote', [app\controllers\NotesController::class, 'createNote']);
+$app->router->get('/borrarNota', [app\controllers\NotesController::class, 'borrarNota']);
+$app->router->post('/borrarNota', [app\controllers\NotesController::class, 'borrarNota']);
+
 
 $app->run();

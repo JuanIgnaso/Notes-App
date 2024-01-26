@@ -20,6 +20,20 @@ class Notas extends DBmodel
         return parent::save();
     }
 
+    public function tableName(): string
+    {
+        return 'Notas';
+    }
+
+    public function delete(): bool
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("DELETE FROM $tableName WHERE id=:id");
+        $statement->bindValue(":id", $this->id);
+        $statement->execute();
+        return $statement->rowCount() != 0;
+
+    }
 
     public function getUserNotes()
     {
@@ -30,10 +44,6 @@ class Notas extends DBmodel
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function tableName(): string
-    {
-        return 'Notas';
-    }
 
     public function primaryKey(): string
     {
