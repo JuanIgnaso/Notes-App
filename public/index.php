@@ -36,10 +36,15 @@ $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
 
 ###AÑADIR NOTAS
-$app->router->post('/addNote', [app\controllers\NotesController::class, 'createNote']);
-$app->router->get('/addNote', [app\controllers\NotesController::class, 'createNote']);
+$app->router->post('/addNota', [app\controllers\NotesController::class, 'crearNota']);
+$app->router->get('/addNota', [app\controllers\NotesController::class, 'crearNota']);
 $app->router->get('/borrarNota', [app\controllers\NotesController::class, 'borrarNota']);
 $app->router->post('/borrarNota', [app\controllers\NotesController::class, 'borrarNota']);
+
+###BUSCAR POR TITULO
+$app->router->get('/getNotes', [app\controllers\NotesController::class, 'buscarNota']);
+$app->router->post('/getNotes', [app\controllers\NotesController::class, 'buscarNota']);
+
 
 
 $app->run();

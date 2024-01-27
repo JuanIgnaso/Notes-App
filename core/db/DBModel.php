@@ -27,6 +27,15 @@ abstract class DBmodel extends Model
         return true;
     }
 
+    public function getAttrList($attr)
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("SELECT $attr  FROM  $tableName WHERE $attr LIKE :search ORDER BY 1");
+        $statement->bindValue(":search", "%" . $this->{$attr} . "%");
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function delete(): bool
     {
         $tableName = $this->tableName();
@@ -48,6 +57,7 @@ abstract class DBmodel extends Model
         return self::query("SELECT * FROM $tableName ORDER BY 1")->fetchAll(\PDO::FETCH_ASSOC);
 
     }
+
 
     public static function prepare($sql)
     {

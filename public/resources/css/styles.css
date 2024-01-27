@@ -246,7 +246,7 @@ h3{
         flex-direction: column;
         align-items: center;
         gap:1em;
-        margin-bottom: 3em;
+        margin-bottom: 4em;
         position:relative;
 
         label{
@@ -260,6 +260,28 @@ h3{
             left:0;
         }
 
+        input:not([type="submit"]){
+            border:unset;
+            background:unset;
+            border-bottom: 2px solid cornflowerblue;
+            outline: none;
+        }
+
+        input:not([type="submit"]):focus{
+            border-bottom: 2px solid darkslateblue;
+        }
+        
+        
+        textarea:focus{
+            border: 2px solid darkslateblue;
+        }
+
+        textarea{
+            background:unset;
+            border: 2px solid cornflowerblue;
+            outline: none;   
+        }
+
         input[type="submit"]{
             border-radius: 100% 0% 100% 0% / 3% 92% 8% 97% ;
             border:unset;
@@ -267,6 +289,7 @@ h3{
             font-size: 1em;
             margin:auto;
             cursor: pointer;
+            outline:none;
         }
 
     }

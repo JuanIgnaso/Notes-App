@@ -29,7 +29,7 @@ class NotesController extends Controller
         ]);
     }
 
-    public function createNote(Request $request)
+    public function crearNota(Request $request)
     {
         $model = new Notas();
         if ($request->isPost()) {
@@ -53,9 +53,28 @@ class NotesController extends Controller
                 exit;
             } else {
                 Application::$app->response->setStatusCode(400);
+                Application::$app->session->setFlash('error', 'Error: ' . 'La nota que intentas borrar no existe!');
                 exit;
             }
         }
+    }
+
+    public function buscarNota(Request $request)
+    {
+        $model = new Notas();
+        if ($request->isPost()) {
+            $model->loadData($request->getBody());
+            $lista = $model->getAttrList('titulo');
+            if (!$lista) {
+                Application::$app->response->setStatusCode(400);
+                exit;
+            } else {
+                Application::$app->response->setStatusCode(200);
+                echo json_encode($lista);
+                exit;
+            }
+        }
+
     }
 
     public function inicio(Request $request)

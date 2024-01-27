@@ -8,7 +8,7 @@ class Notas extends DBmodel
 {
 
     public string $id;
-    public string $titulo;
+    public string $titulo = '';
     public string $descripcion;
     public int $estado = 1;
     public int $importante = 0;
@@ -35,6 +35,7 @@ class Notas extends DBmodel
 
     }
 
+
     public function getUserNotes()
     {
         $tableName = $this->tableName();
@@ -43,7 +44,6 @@ class Notas extends DBmodel
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
-
 
     public function primaryKey(): string
     {

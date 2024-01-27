@@ -33,7 +33,7 @@ $this->title = 'Mis Notas';
     <div id="container_inner">
         <header>
             <!-- var_dump(Application::$app->user->id); -->
-            <form action="/addNote" method="post">
+            <form action="/addNota" method="post">
                 <i class="fa-solid fa-thumbtack pin"></i>
                 <h2>Crear una Nota nueva</h2>
                 <label>
@@ -42,7 +42,7 @@ $this->title = 'Mis Notas';
                 </label>
                 <label>
                     Descripción
-                    <input type="text" name="descripcion" id="descripcion">
+                    <textarea name="descripcion" id="descripcion" cols="30" rows="3"></textarea>
                 </label>
                 <input type="submit" value="Crear" id="crear">
             </form>
@@ -63,11 +63,34 @@ $this->title = 'Mis Notas';
             </ol>
             <h2>Filtrar por Título</h2>
 
+            <!-- AUTOCOMPLETE -->
             <form action="/getByTitle" method="post">
                 <i class="fa-solid fa-thumbtack pin"></i>
-                <input type="text" name="titulo" id="titulo">
+                <input type="text" name="tituloNota" id="tituloNota">
                 <input type="submit" value="Buscar" id="buscar">
             </form>
+            <script>
+                /*
+                SCRIPT PARA RECIBIR SUGERENCIAS
+                */
+
+                document.querySelector('#tituloNota').addEventListener('keyup', function () {
+                    let buscar = this.value;//texto que escribe el usuario
+                    $.ajax({
+                        url: '/getNotes',
+                        type: 'POST',
+                        data: {
+                            titulo: buscar,
+                        },
+                        success: function (response) {
+                            console.log(JSON.parse(response));
+                        },
+                        error: function (error) {
+                            console.log(JSON.parse(error.responseText));
+                        }
+                    })
+                });
+            </script>
 
         </header>
         <?php
@@ -78,7 +101,6 @@ $this->title = 'Mis Notas';
                 foreach ($notas as $nota) {
                     ?>
                     <div class="note <?php echo $nota['clase']; ?>">
-                        <input type="hidden" name="nota<?php echo $nota['id']; ?>" value="<?php echo $nota['id']; ?>">
                         <div class="tape">
                             <div class="tape_shade"></div>
                         </div>
@@ -105,6 +127,9 @@ $this->title = 'Mis Notas';
                 }
                 ?>
                 <script>
+                    /*
+                    SCRIPT PARA BORRAR LAS NOTAS
+                    */
                     function deleteNote(id) {
                         $.ajax({
                             url: '/borrarNota',
