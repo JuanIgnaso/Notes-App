@@ -292,6 +292,19 @@ h3{
             outline:none;
         }
 
+        #search{
+            position: relative;
+            margin-bottom: 1em;
+        }
+
+        #searchResults{
+            width: 100%;
+            position:absolute;
+            border-left:1px solid black;
+            border-right:1px solid black;
+            border-bottom:1px solid black;
+            background-color: white;
+        }
     }
 
     

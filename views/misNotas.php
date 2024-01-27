@@ -66,7 +66,18 @@ $this->title = 'Mis Notas';
             <!-- AUTOCOMPLETE -->
             <form action="/getByTitle" method="post">
                 <i class="fa-solid fa-thumbtack pin"></i>
-                <input type="text" name="tituloNota" id="tituloNota">
+                <div id="search">
+                    <input type="text" name="tituloNota" id="tituloNota">
+                    <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
+                    <div id="searchResults">
+                        <!-- PLACEHOLDER -->
+                        <ol>
+                            <li onclick="autoComplete(this.innerHTML)">aBBa</li>
+                            <li onclick="autoComplete(this.innerHTML)">aaaaaa</li>
+                            <li onclick="autoComplete(this.innerHTML)">aFDds</li>
+                        </ol>
+                    </div>
+                </div>
                 <input type="submit" value="Buscar" id="buscar">
             </form>
             <script>
@@ -74,6 +85,9 @@ $this->title = 'Mis Notas';
                 SCRIPT PARA RECIBIR SUGERENCIAS
                 */
 
+                function autoComplete(value) {
+                    document.querySelector('#tituloNota').value = value;
+                }
                 document.querySelector('#tituloNota').addEventListener('keyup', function () {
                     let buscar = this.value;//texto que escribe el usuario
                     $.ajax({
@@ -83,7 +97,8 @@ $this->title = 'Mis Notas';
                             titulo: buscar,
                         },
                         success: function (response) {
-                            console.log(JSON.parse(response));
+                            let resp = JSON.parse(response).map((x) => x.titulo);//Lista de titulos
+                            console.log(resp);
                         },
                         error: function (error) {
                             console.log(JSON.parse(error.responseText));

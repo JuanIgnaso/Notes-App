@@ -65,8 +65,9 @@ class NotesController extends Controller
         if ($request->isPost()) {
             $model->loadData($request->getBody());
             $lista = $model->getAttrList('titulo');
-            if (!$lista) {
+            if (!$lista || strlen(trim($model->titulo)) == 0) {
                 Application::$app->response->setStatusCode(400);
+                echo json_encode(['error' => 'no se encuentran registros']);
                 exit;
             } else {
                 Application::$app->response->setStatusCode(200);
