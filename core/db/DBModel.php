@@ -27,6 +27,13 @@ abstract class DBmodel extends Model
         return true;
     }
 
+    /**
+     * Devuelve una lista de los valores de un atributo que coincidan
+     * con el valor cargado en ese atributo(el atributo en cuestión debe de estar previamente
+     * cargado en el modelo mediante $modelo->loadData()).
+     * 
+     * @param $attr
+     */
     public function getAttrList($attr)
     {
         $tableName = $this->tableName();

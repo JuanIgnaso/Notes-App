@@ -23,6 +23,13 @@ class NotesController extends Controller
         $model = new Notas();
         $misNotas = $model->getUserNotes();
 
+        ###El usuario está buscando algo
+        if ($request->isPost()) {
+            $body = $request->getBody();
+            $model->loadData(['titulo' => $body['tituloNota']]);
+            $misNotas = $model->getByTitle();
+        }
+
         return $this->render('misNotas', [
             'model' => $model,
             'notas' => $misNotas,

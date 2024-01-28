@@ -25,6 +25,7 @@ $app = new Application(dirname(__DIR__), $config);
 ###AQUÍ SE DEFINEN LAS RUTAS###
 $app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
 $app->router->get('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
+$app->router->post('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
 
 ###LOGIN/REGISTER
 $app->router->get('/register', [app\controllers\AuthController::class, 'register']);

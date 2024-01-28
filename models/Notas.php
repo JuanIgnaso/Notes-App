@@ -13,6 +13,7 @@ class Notas extends DBmodel
     public int $estado = 1;
     public int $importante = 0;
     public string $usuario;
+    const TABLE_NAME = 'Notas';
 
     public function save()
     {
@@ -27,19 +28,29 @@ class Notas extends DBmodel
 
     public function delete(): bool
     {
-        $tableName = $this->tableName();
-        $statement = self::prepare("DELETE FROM $tableName WHERE id=:id");
+
+        $statement = self::prepare("DELETE FROM " . self::TABLE_NAME . " WHERE id=:id");
         $statement->bindValue(":id", $this->id);
         $statement->execute();
         return $statement->rowCount() != 0;
 
     }
 
+    public function getByTitle()
+    {
+        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE titulo LIKE :titulo ORDER BY 1");
+        $statement->bindValue(":titulo", "%" . $this->titulo . "%");
+        $statement->execute();
+        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return !$result || count($result) == 0 ? $this->getUserNotes() : $result;
+
+    }
+
 
     public function getUserNotes()
     {
-        $tableName = $this->tableName();
-        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM Notas LEFT JOIN estado ON $tableName.estado = estado.id WHERE usuario=:id ORDER BY 1");
+
+        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE usuario=:id ORDER BY 1");
         $statement->bindValue(":id", Application::$app->user->id);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);

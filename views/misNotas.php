@@ -58,37 +58,37 @@ $this->title = 'Mis Notas';
                         Pausa</span></li>
                 <li><span class="finished" aria-label="filtrar terminadas"><i
                             class="fa-solid fa-thumbtack pin"></i>Terminadas</span></li>
-                <li><span class="no_started" aria-label="mostrar todas"><i
-                            class="fa-solid fa-thumbtack pin"></i>Todas</span></li>
+                <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
+                            href="/misNotas">Todas</a></span></li>
             </ol>
             <h2>Filtrar por Título</h2>
 
             <!-- AUTOCOMPLETE -->
-            <form action="/getByTitle" method="post">
+            <form action="" method="post" id="buscarTitulo">
                 <i class="fa-solid fa-thumbtack pin"></i>
                 <div id="search">
-                    <input type="text" name="tituloNota" id="tituloNota">
+                    <input type="text" name="tituloNota" id="tituloNota" autoComplete="off">
                     <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
-                    <div id="searchResults">
-                        <!-- PLACEHOLDER -->
-                        <ol>
-                            <li onclick="autoComplete(this.innerHTML)">aBBa</li>
-                            <li onclick="autoComplete(this.innerHTML)">aaaaaa</li>
-                            <li onclick="autoComplete(this.innerHTML)">aFDds</li>
-                        </ol>
-                    </div>
-                </div>
-                <input type="submit" value="Buscar" id="buscar">
+                    <div id="searchResults"></div>
+                    <input type="submit" value="Buscar" id="buscar">
             </form>
             <script>
                 /*
                 SCRIPT PARA RECIBIR SUGERENCIAS
                 */
+                let userInput = document.querySelector('#tituloNota');
+                let sugerencias = document.querySelector('#searchResults');
 
                 function autoComplete(value) {
                     document.querySelector('#tituloNota').value = value;
                 }
-                document.querySelector('#tituloNota').addEventListener('keyup', function () {
+
+
+                // userInput.addEventListener('focusout', function () {
+                //     sugerencias.innerHTML = '';
+                // });
+
+                userInput.addEventListener('keyup', function () {
                     let buscar = this.value;//texto que escribe el usuario
                     $.ajax({
                         url: '/getNotes',
@@ -98,13 +98,31 @@ $this->title = 'Mis Notas';
                         },
                         success: function (response) {
                             let resp = JSON.parse(response).map((x) => x.titulo);//Lista de titulos
+                            print(resp);
                             console.log(resp);
                         },
                         error: function (error) {
+                            sugerencias.innerHTML = "<ol><li>Sin resultados...</li></ol>";
                             console.log(JSON.parse(error.responseText));
                         }
                     })
                 });
+
+
+
+                function print(data) {
+                    sugerencias.innerHTML = '';
+                    let list = document.createElement("ol");
+                    data.forEach(element => {
+                        let item = document.createElement('li');
+                        item.setAttribute('onclick', 'autoComplete(this.innerHTML)');
+                        let content = document.createTextNode(element);
+                        item.appendChild(content);
+                        list.appendChild(item);
+
+                    });
+                    sugerencias.appendChild(list);
+                }
             </script>
 
         </header>
@@ -115,7 +133,7 @@ $this->title = 'Mis Notas';
                 <?php
                 foreach ($notas as $nota) {
                     ?>
-                    <div class="note <?php echo $nota['clase']; ?>">
+                    <div class="note <?php echo $nota['clase']; ?>" id="Note<?php echo $nota['id']; ?>">
                         <div class="tape">
                             <div class="tape_shade"></div>
                         </div>
@@ -153,7 +171,9 @@ $this->title = 'Mis Notas';
                                 id: id,
                             },
                             success: function (response) {
-                                location.reload();
+                                //Elimina el elemento del DOM si este es borrado de la BBDD
+                                let element = document.getElementById("Note" + id);
+                                element.remove();
                                 console.log('Elemento borrado');
                             },
                             error: function (error) {

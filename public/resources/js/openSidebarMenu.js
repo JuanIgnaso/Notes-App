@@ -14,4 +14,7 @@ window.onclick = function (event) {
             menu.classList.remove('mostrar');
         }
     }
+    if(!event.target.matches('#searchResults')){
+        document.querySelector('#searchResults').innerHTML = '';
+    }
 }
