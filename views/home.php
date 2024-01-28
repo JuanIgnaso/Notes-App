@@ -48,13 +48,22 @@ $this->title = 'Inicio';
         <p>En My Notes App puedes hacer las siguientes funciones dentro de la aplicación:</p>
         <div id="funcionesLista">
             <article>
-                <h3>Funcion 1</h3>
+                <h3>Crear Notas de tus tareas</h3>
+                <p>Escribir notas de lo que necesites acordarte, con <strong>título, descripción y prioridad</strong>
+                </p>
             </article>
             <article>
-                <h3>Funcion 2</h3>
+                <h3>Modificar su contenido</h3>
+                <p>Podrás cambiar tanto el título como descripción, y estado según tu progreso sobre dicho objetivo.</p>
             </article>
             <article>
-                <h3>Funcion 3</h3>
+                <h3>Filtrar según características</h3>
+                <p>Ayudarte a encontrar la Nota que buscas es importante, dentro de la aplicacíon podrás buscar por:</p>
+                <ul>
+                    <li>Título</li>
+                    <li>Estado de la Nota</li>
+                    <li>Separar las importantes</li>
+                </ul>
             </article>
         </div>
     </section>
@@ -62,5 +71,6 @@ $this->title = 'Inicio';
         <h2>Como puedes realizar dichas acciones?. 🗒️ </h2>
         <p>Puedes realizar estas operaciones registrándote en la aplicación, bien desde el menú del principio de la
             página o haciendo click aquí en Registrarse ahora.</p>
+        <a href="/register">Registrar Cuenta<i class="fa-solid fa-pen-fancy"></i></a>
     </section>
 </main>

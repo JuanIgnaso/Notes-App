@@ -4,6 +4,16 @@
 /* Cabeceras 'Amtic SC' */
 
 
+ol,ul,li{
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+p{
+    font-size: 1.15em;
+}
+
 main{
     width: 75%;
     margin:auto !important;
@@ -11,6 +21,8 @@ main{
     section{
         display: flex;
         flex-direction: column;
+        gap:0.5em;
+        margin-bottom: 4em;
     }
 
     #objetivo{
@@ -23,6 +35,33 @@ main{
 
     #unirse{
         align-items: end;
+
+        a{
+            background-color: #fff;
+            padding: 0.5em;
+            color:#000;
+            position:relative;
+            transition:0.5s;
+            margin-top: 1em;
+
+            i{
+                position:absolute;
+                bottom:0;
+                font-size: 1.5em;
+                transition:0.7s;
+                color:crimson;
+            }
+        }
+
+        a:hover{
+            transform: scale(1.1);
+        }
+
+        a:hover i{
+            bottom:50%;
+            right: 5%;
+            rotate: -25deg;
+        }
     }
 
     h2::before{
@@ -34,8 +73,35 @@ main{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4,1fr);
-}
+    gap:1em;
+    position: relative;
 
+    article{
+        color:#fff;
+        padding:0.5em;
+        text-align: center;
+        aspect-ratio: 1/1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap:1em;
+        list-style: circle;
+    }
+
+    article:nth-of-type(1){
+        background-color: blueviolet;
+    }
+
+    article:nth-of-type(2){
+        background-color: rgb(224, 0, 0);
+        position: relative;
+        top:5%;
+    }
+
+    article:nth-of-type(3){
+        background-color: goldenrod;
+    }
+}
 
 body{
     background-image:url('../img/white-wall.jpg');
@@ -53,11 +119,7 @@ body *{
     font-family: "Patrick Hand","Playpen Sans", cursive;
 }
 
-ol,ul,li{
-    list-style: none;
-    padding:0;
-    margin:0;
-}
+
 
 h1,h2,h3,h4,label{
     font-family: "Amatic SC", sans-serif;
@@ -160,3 +222,49 @@ h3{
 }
 
 /*   --------------   */
+
+/* TAMAÑOS ------------------------ */
+
+
+
+/*MEDIANO*/
+
+
+/*GRANDE*/
+@media screen and (max-width: 1300px){
+    
+}
+
+@media screen and (max-width: 900px){
+    #funcionesLista{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:1em;
+    position: relative;
+
+    article:nth-of-type(2){
+        background-color: rgb(224, 0, 0);
+        position: relative;
+        top: 0%;
+    }
+    }
+}
+
+/*PEQUEÑO*/
+@media screen and (max-width: 500px){
+    #funcionesLista{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap:1em;
+        position: relative;
+
+
+        article:nth-of-type(2){
+            background-color: rgb(224, 0, 0);
+            position: relative;
+        }
+
+        }
+}
