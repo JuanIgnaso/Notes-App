@@ -39,11 +39,9 @@ h1,h2,h3,h4,label{
 
 /*  MENU USUARIO--------------*/
 #menuUsuario{
-    background: url('../img/paper_texture.jpg');
     background-size: 100%;
     padding:0.5em;
     width: 25%;
-    box-shadow: 0px 0px 4px 2px rgb(0,0,0);
 
     ol{
         display: flex;
@@ -319,7 +317,7 @@ h3{
 
     #buscarTitulo{
         width: 30%;
-
+        margin-top: 1em;
         input[type="text"]{
             width: 90%;
         }
@@ -327,7 +325,7 @@ h3{
 
     form{
         background-image: url('../img/paper_texture.jpg');
-        padding:2em;
+        padding:1.5em;
         position: relative;
         background-image: 100%;
     }

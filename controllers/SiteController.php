@@ -12,6 +12,8 @@ class SiteController extends Controller
      */
     public function homePage()
     {
+        $this->setLayout('homeLayout');
+
         return $this->render('home');
     }
 }

@@ -61,16 +61,17 @@ $this->title = 'Mis Notas';
                 <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
                             href="/misNotas">Todas</a></span></li>
             </ol>
-            <h2>Filtrar por Título</h2>
 
             <!-- AUTOCOMPLETE -->
             <form action="" method="post" id="buscarTitulo">
                 <i class="fa-solid fa-thumbtack pin"></i>
+                <h2>Buscar por título</h2>
                 <div id="search">
                     <input type="text" name="tituloNota" id="tituloNota" autoComplete="off">
                     <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
                     <div id="searchResults"></div>
-                    <input type="submit" value="Buscar" id="buscar">
+                </div>
+                <input type="submit" value="Buscar" id="buscar">
             </form>
             <script>
                 /*
@@ -102,8 +103,7 @@ $this->title = 'Mis Notas';
                             console.log(resp);
                         },
                         error: function (error) {
-                            sugerencias.innerHTML = "<ol><li>Sin resultados...</li></ol>";
-                            console.log(JSON.parse(error.responseText));
+                            sugerencias.innerHTML = "<ol><li>" + JSON.parse(error.responseText).error + "</li></ol>";
                         }
                     })
                 });

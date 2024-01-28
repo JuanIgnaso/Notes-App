@@ -74,7 +74,7 @@ class NotesController extends Controller
             $lista = $model->getAttrList('titulo');
             if (!$lista || strlen(trim($model->titulo)) == 0) {
                 Application::$app->response->setStatusCode(400);
-                echo json_encode(['error' => 'no se encuentran registros']);
+                echo json_encode(['error' => 'No se encuentran registros...']);
                 exit;
             } else {
                 Application::$app->response->setStatusCode(200);

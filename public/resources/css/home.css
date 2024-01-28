@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Patrick+Hand&family=Playpen+Sans:wght@100..800&display=swap');
+
+/* Fuente primaria 'Patric Hand', secundaria 'Playpen Sans' */
+/* Cabeceras 'Amtic SC' */
+
+
+main{
+    width: 75%;
+    margin:auto !important;
+
+    section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #objetivo{
+        align-items: end;
+    }
+
+    #funciones{
+        align-items: start;
+    }
+
+    #unirse{
+        align-items: end;
+    }
+
+    h2::before{
+        content: '- ';
+    }
+}
+
+#funcionesLista{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+
+body{
+    background-image:url('../img/white-wall.jpg');
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+
+a{
+    text-decoration: none;
+}
+
+body *{
+    box-sizing: border-box;
+    margin:0px;
+    font-family: "Patrick Hand","Playpen Sans", cursive;
+}
+
+ol,ul,li{
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+h1,h2,h3,h4,label{
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+h1{
+    font-size: 4em;
+}
+
+h2{
+    font-size: 2.75em;
+}
+
+h3{
+    font-size: 1.5em;
+}
+
+
+/*  MENU USUARIO--------------*/
+#menuUsuario{
+    background-size: 100%;
+    padding:0.5em;
+    width: 25%;
+
+    ol{
+        display: flex;
+        gap: 0.25em;
+        align-items: center;
+    }
+
+    i,a{
+        color:black;
+        text-decoration: none;
+    }
+
+    .fa-right-from-bracket{
+        color:crimson;
+    }
+}
+
+/* ------------------------ */
+
+.alert{
+    background-image:url('../img/paper_texture.jpg');
+    background-size: 100%;
+    text-align: center;
+    color:white;
+}
+
+.background{
+    padding:0.5em;
+}
+
+.success{
+    background-color:rgba(0, 100, 0,0.35);
+}
+
+.warning{
+    background-color:rgba(255,255,0,0.35);
+}
+
+.danger{
+    background-color:rgba(100,0,0,0.35);
+}
+
+
+
+/* FOOTER ------------------ */
+#footerWeb{
+    border-top:1px solid rgb(0,0,0);
+    margin: auto;
+    margin-top:2em;
+    padding: 1em;
+}
+
+#footer_about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0.75em;
+
+    i{
+        font-size: 1.35em;
+        color:rgb(0,0,0);
+    }
+
+    h3{
+        font-size: 2em;
+    }
+}
+
+
+#footer-contacts{
+    display: flex;
+    gap: 0.75em;
+    justify-content: center;
+}
+
+/*   --------------   */

@@ -15,9 +15,14 @@ class Notas extends DBmodel
     public string $usuario;
     const TABLE_NAME = 'Notas';
 
-    public function save()
+
+    public function __construct()
     {
         $this->usuario = Application::$app->user->id;
+    }
+
+    public function save()
+    {
         return parent::save();
     }
 
@@ -29,8 +34,9 @@ class Notas extends DBmodel
     public function delete(): bool
     {
 
-        $statement = self::prepare("DELETE FROM " . self::TABLE_NAME . " WHERE id=:id");
+        $statement = self::prepare("DELETE FROM " . self::TABLE_NAME . " WHERE id=:id AND usuario=:usuario");
         $statement->bindValue(":id", $this->id);
+        $statement->bindValue(":usuario", Application::$app->user->id);
         $statement->execute();
         return $statement->rowCount() != 0;
 
