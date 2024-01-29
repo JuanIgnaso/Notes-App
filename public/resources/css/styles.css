@@ -16,7 +16,7 @@ a{
 body *{
     box-sizing: border-box;
     margin:0px;
-    font-family: "Patrick Hand","Playpen Sans", cursive;
+    font-family: var(--fuente-texto);
 }
 
 article{
@@ -32,7 +32,7 @@ ol,ul,li{
 }
 
 h1,h2,h3,h4,label{
-    font-family: "Amatic SC", sans-serif;
+    font-family: var(--fuente-cabeceras);
     font-weight: 700;
     font-style: normal;
 }
@@ -306,7 +306,7 @@ h3{
         #searchResults{
             position:absolute;
             width: 100%;
-
+            z-index: 30;
 
             ol{
                 box-shadow: 0px 5px 8px 2px #000;
@@ -347,19 +347,32 @@ h3{
     gap:1em;
     justify-content: center;
 
-    li span:hover{
+    label{
+        font-family: var(--fuente-texto);
+    }
+
+    input[type="checkbox"]{
+        display: none;
+    }
+
+    
+    li label:hover{
         cursor:pointer;
         box-shadow: 0px 0px 5px 2px rgb(0,0,0);
     }
 
-    li span:hover > .pin{
+    li label:hover > .pin{
         top:-15%;
     }
 
-    li span{
+    li label{
         padding:0.55em;
         position: relative;
     }
+}
+
+.checked{
+    box-shadow: 0px 0px 5px 2px rgb(0,0,0);
 }
 
 .pin{
@@ -562,20 +575,30 @@ option{
 .paused{
     background:lightgray;
     border:gray 2px solid;
+    position: relative;
 }
 
 .in_progress{
     background:lightyellow;
     border:goldenrod 2px solid;
+    position: relative;
+
 }
 
 .finished{
     background:lightgreen;
     border:green 2px solid;
+    position: relative;
+
 }
 
 .no_started{
     background:#fff;
     border: 2px solid rgba(177, 177, 177, 1);
+    position: relative;
 }
 
+:root{
+    --fuente-cabeceras:"Amatic SC", sans-serif;
+    --fuente-texto:"Patrick Hand","Playpen Sans", cursive;
+}

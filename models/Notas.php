@@ -13,6 +13,7 @@ class Notas extends DBmodel
     public int $estado = 1;
     public int $importante = 0;
     public string $usuario;
+    public ?array $estados = null;
     const TABLE_NAME = 'Notas';
 
 
@@ -44,12 +45,35 @@ class Notas extends DBmodel
 
     public function getByTitle()
     {
-        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE titulo LIKE :titulo ORDER BY 1");
-        $statement->bindValue(":titulo", "%" . $this->titulo . "%");
-        $statement->execute();
-        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        return !$result || count($result) == 0 ? $this->getUserNotes() : $result;
+        $conditions = [];
+        $parameters = [];
 
+        //Cargar estados
+        if ($this->estados != null && count($this->estados) != 0) {
+            $contador = 1;
+            $conditionsEstado = [];
+            foreach ($this->estados as $estado) {
+                $conditionsEstado[] = ':estado' . $contador;
+                $parameters['estado' . $contador] = (int) $estado;
+                $contador++;
+            }
+            if (count($parameters) > 0) {
+                $conditions[] = ' Notas.estado IN (' . implode(',', $conditionsEstado) . ')';
+            }
+        }
+        //Si el usuario ha escrito un titulo
+        if (isset($this->titulo)) {
+            $conditions[] = 'titulo LIKE :titulo';
+            $parameters['titulo'] = "%" . $this->titulo . "%";
+        }
+        if (count($parameters) != 0) {
+            $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1");
+            //echo "SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1";
+            $statement->execute($parameters);
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            return $this->getUserNotes();
+        }
     }
 
 

@@ -26,7 +26,12 @@ class NotesController extends Controller
         ###El usuario está buscando algo
         if ($request->isPost()) {
             $body = $request->getBody();
-            $model->loadData(['titulo' => $body['tituloNota']]);
+            $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados']]);
+
+            // var_dump($model->estados);
+            foreach ($model->estados as $estado) {
+                echo $estado;
+            }
             $misNotas = $model->getByTitle();
         }
 

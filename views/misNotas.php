@@ -50,15 +50,45 @@ $this->title = 'Mis Notas';
             <form action="" method="post" id="filtros">
                 <h2>Filtrar por estados</h2>
                 <ol id="estados">
-                    <li><span class="no_started" aria-label="filtrar sin empezar"><i
-                                class="fa-solid fa-thumbtack pin"></i>Sin empezar</span></li>
-                    <li><span class="in_progress" aria-label="filtrar empezadas"><i
-                                class="fa-solid fa-thumbtack pin"></i>En
-                            progreso</span></li>
-                    <li><span class="paused" aria-label="filtrar pausadas"><i class="fa-solid fa-thumbtack pin"></i>En
-                            Pausa</span></li>
-                    <li><span class="finished" aria-label="filtrar terminadas"><i
-                                class="fa-solid fa-thumbtack pin"></i>Terminadas</span></li>
+                    <!-- <input type="checkbox" name="check_list[]" value="C/C++"><label>C/C++</label><br /> -->
+                    <li>
+                        <label class="no_started">
+                            <i class="fa-solid fa-thumbtack pin"></i>
+                            Sin empezar
+                            <input type="checkbox" name="estados[]" value="1">
+                        </label>
+                    </li>
+                    <li>
+                        <label class="in_progress">
+                            <i class="fa-solid fa-thumbtack pin"></i>
+                            En progreso
+                            <input type="checkbox" name="estados[]" value="2">
+                        </label>
+                    </li>
+                    <li>
+                        <label class="paused">
+                            <i class="fa-solid fa-thumbtack pin"></i>
+                            Pausada
+                            <input type="checkbox" name="estados[]" value="3">
+                        </label>
+                    </li>
+                    <li>
+                        <label class="finished">
+                            <i class="fa-solid fa-thumbtack pin"></i>
+                            Sin empezar
+                            <input type="checkbox" name="estados[]" value="4">
+                        </label>
+                    </li>
+                    <script>
+                        //Cambiar estilo según están o no marcados
+                        let estados = document.querySelectorAll("#estados input[type='checkbox']");
+
+                        estados.forEach(element => {
+                            element.addEventListener('change', function () {
+                                element.checked ? element.parentElement.classList.toggle('checked') : element.parentElement.classList.toggle('checked');
+                            })
+                        });
+                    </script>
                     <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
                                 href="/misNotas">Todas</a></span></li>
                 </ol>
@@ -73,7 +103,6 @@ $this->title = 'Mis Notas';
                         <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
                         <div id="searchResults"></div>
 
-                        <!-- <input type="checkbox" name="check_list[]" value="C/C++"><label>C/C++</label><br /> -->
                     </div>
                     <input type="submit" value="Buscar" id="buscar">
                 </div>
