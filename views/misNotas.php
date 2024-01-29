@@ -33,7 +33,7 @@ $this->title = 'Mis Notas';
     <div id="container_inner">
         <header>
             <!-- var_dump(Application::$app->user->id); -->
-            <form action="/addNota" method="post">
+            <form action="/addNota" method="post" id="nuevaNota">
                 <i class="fa-solid fa-thumbtack pin"></i>
                 <h2>Crear una Nota nueva</h2>
                 <label>
@@ -47,32 +47,38 @@ $this->title = 'Mis Notas';
                 <input type="submit" value="Crear" id="crear">
             </form>
 
+            <form action="" method="post" id="filtros">
+                <h2>Filtrar por estados</h2>
+                <ol id="estados">
+                    <li><span class="no_started" aria-label="filtrar sin empezar"><i
+                                class="fa-solid fa-thumbtack pin"></i>Sin empezar</span></li>
+                    <li><span class="in_progress" aria-label="filtrar empezadas"><i
+                                class="fa-solid fa-thumbtack pin"></i>En
+                            progreso</span></li>
+                    <li><span class="paused" aria-label="filtrar pausadas"><i class="fa-solid fa-thumbtack pin"></i>En
+                            Pausa</span></li>
+                    <li><span class="finished" aria-label="filtrar terminadas"><i
+                                class="fa-solid fa-thumbtack pin"></i>Terminadas</span></li>
+                    <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
+                                href="/misNotas">Todas</a></span></li>
+                </ol>
 
-            <h2>Filtrar por estados</h2>
-            <ol id="estados">
-                <li><span class="no_started" aria-label="filtrar sin empezar"><i
-                            class="fa-solid fa-thumbtack pin"></i>Sin empezar</span></li>
-                <li><span class="in_progress" aria-label="filtrar empezadas"><i class="fa-solid fa-thumbtack pin"></i>En
-                        progreso</span></li>
-                <li><span class="paused" aria-label="filtrar pausadas"><i class="fa-solid fa-thumbtack pin"></i>En
-                        Pausa</span></li>
-                <li><span class="finished" aria-label="filtrar terminadas"><i
-                            class="fa-solid fa-thumbtack pin"></i>Terminadas</span></li>
-                <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
-                            href="/misNotas">Todas</a></span></li>
-            </ol>
+                <!-- AUTOCOMPLETE -->
 
-            <!-- AUTOCOMPLETE -->
-            <form action="" method="post" id="buscarTitulo">
-                <i class="fa-solid fa-thumbtack pin"></i>
-                <h2>Buscar por título</h2>
-                <div id="search">
-                    <input type="text" name="tituloNota" id="tituloNota" autoComplete="off">
-                    <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
-                    <div id="searchResults"></div>
+                <div id="buscarTitulo">
+                    <i class="fa-solid fa-thumbtack pin"></i>
+                    <h2>Buscar por título</h2>
+                    <div id="search">
+                        <input type="text" name="tituloNota" id="tituloNota" autoComplete="off">
+                        <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
+                        <div id="searchResults"></div>
+
+                        <!-- <input type="checkbox" name="check_list[]" value="C/C++"><label>C/C++</label><br /> -->
+                    </div>
+                    <input type="submit" value="Buscar" id="buscar">
                 </div>
-                <input type="submit" value="Buscar" id="buscar">
             </form>
+
             <script>
                 /*
                 SCRIPT PARA RECIBIR SUGERENCIAS

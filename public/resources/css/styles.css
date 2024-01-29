@@ -258,7 +258,10 @@ h3{
             margin-bottom:0.5em;
         }
         
-        form:first-of-type{
+        #nuevaNota{
+            background-image: url('../img/paper_texture.jpg');
+            padding:1.5em;
+            background-image: 100%;
             position:absolute;
             left:0;
         }
@@ -315,20 +318,25 @@ h3{
         
     }
 
+    #filtros{
+        display: flex;
+        flex-direction: column;
+        gap:2em;
+    }
+
     #buscarTitulo{
-        width: 30%;
-        margin-top: 1em;
+        position:relative;
+        width: 100%;
+        margin-top: 3em;
+        margin: auto;
+        padding:0.5em;
+        background-image: url('../img/paper_texture.jpg');
         input[type="text"]{
             width: 90%;
         }
     }
 
-    form{
-        background-image: url('../img/paper_texture.jpg');
-        padding:1.5em;
-        position: relative;
-        background-image: 100%;
-    }
+
 }
 
 #estados{
@@ -408,13 +416,15 @@ option{
         width: 85%;
     }
 
+    
+
     #notes_container{
         grid-template-columns: repeat(3,1fr);
     }
 
     #container_inner{ 
         header{
-            form:first-of-type{
+            #nuevaNota{
                 position:relative;
                 margin:auto;
             }
