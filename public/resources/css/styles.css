@@ -184,6 +184,7 @@ h3{
     color:crimson;
 }
 
+
 #sidebarMenu{
     background-color: white;
     color:crimson;
@@ -612,6 +613,11 @@ option{
     /* border:green 2px solid; */
     position: relative;
 
+}
+
+.marked_important{
+    background-color: rgb(243, 171, 171) !important;
+    position: relative;
 }
 
 .no_started{

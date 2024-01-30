@@ -66,6 +66,13 @@ $this->title = 'Mis Notas';
                         }
                     }
                     ?>
+                    <li>
+                        <label class="marked_important">
+                            <i class="fa-solid fa-thumbtack pin"></i>
+                            Importantes
+                            <input type="checkbox" name="importante" value="1">
+                        </label>
+                    </li>
                     <script>
                         //Cambiar estilo según están o no marcados
                         let estados = document.querySelectorAll("#estados input[type='checkbox']");
@@ -104,7 +111,8 @@ $this->title = 'Mis Notas';
                 <?php
                 foreach ($notas as $nota) {
                     ?>
-                    <div class="note <?php echo $nota['clase']; ?>" id="Note<?php echo $nota['id']; ?>">
+                    <div class="note <?php echo $nota['clase']; ?> <?php echo $nota['importante'] == 0 ? '' : 'marked_important'; ?>"
+                        id="Note<?php echo $nota['id']; ?>">
                         <div class="tape">
                             <div class="tape_shade"></div>
                         </div>
