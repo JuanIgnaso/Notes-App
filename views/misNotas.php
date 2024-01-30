@@ -51,34 +51,21 @@ $this->title = 'Mis Notas';
                 <h2>Filtrar por estados</h2>
                 <ol id="estados">
                     <!-- <input type="checkbox" name="check_list[]" value="C/C++"><label>C/C++</label><br /> -->
-                    <li>
-                        <label class="no_started">
-                            <i class="fa-solid fa-thumbtack pin"></i>
-                            Sin empezar
-                            <input type="checkbox" name="estados[]" value="1">
-                        </label>
-                    </li>
-                    <li>
-                        <label class="in_progress">
-                            <i class="fa-solid fa-thumbtack pin"></i>
-                            En progreso
-                            <input type="checkbox" name="estados[]" value="2">
-                        </label>
-                    </li>
-                    <li>
-                        <label class="paused">
-                            <i class="fa-solid fa-thumbtack pin"></i>
-                            Pausada
-                            <input type="checkbox" name="estados[]" value="3">
-                        </label>
-                    </li>
-                    <li>
-                        <label class="finished">
-                            <i class="fa-solid fa-thumbtack pin"></i>
-                            Sin empezar
-                            <input type="checkbox" name="estados[]" value="4">
-                        </label>
-                    </li>
+                    <?php
+                    if (isset($estados)) {
+                        foreach ($estados as $estado) {
+                            ?>
+                            <li>
+                                <label class="<?php echo $estado['clase']; ?>">
+                                    <i class="fa-solid fa-thumbtack pin"></i>
+                                    <?php echo $estado['estado']; ?>
+                                    <input type="checkbox" name="estados[]" value="<?php echo $estado['id']; ?>">
+                                </label>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
                     <script>
                         //Cambiar estilo según están o no marcados
                         let estados = document.querySelectorAll("#estados input[type='checkbox']");
@@ -89,8 +76,8 @@ $this->title = 'Mis Notas';
                             })
                         });
                     </script>
-                    <li><span class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
-                                href="/misNotas">Todas</a></span></li>
+                    <li><label class="no_started" aria-label="mostrar todas"><i class="fa-solid fa-thumbtack pin"></i><a
+                                href="/misNotas">Todas</a></label></li>
                 </ol>
 
                 <!-- AUTOCOMPLETE -->
@@ -102,63 +89,12 @@ $this->title = 'Mis Notas';
                         <input type="text" name="tituloNota" id="tituloNota" autoComplete="off">
                         <!-- MOSTRAR AQUÍ LOS RESULTADOS DEL AJAX -->
                         <div id="searchResults"></div>
-
                     </div>
-                    <input type="submit" value="Buscar" id="buscar">
                 </div>
+                <input type="submit" value="Buscar" id="buscar">
             </form>
 
-            <script>
-                /*
-                SCRIPT PARA RECIBIR SUGERENCIAS
-                */
-                let userInput = document.querySelector('#tituloNota');
-                let sugerencias = document.querySelector('#searchResults');
-
-                function autoComplete(value) {
-                    document.querySelector('#tituloNota').value = value;
-                }
-
-
-                // userInput.addEventListener('focusout', function () {
-                //     sugerencias.innerHTML = '';
-                // });
-
-                userInput.addEventListener('keyup', function () {
-                    let buscar = this.value;//texto que escribe el usuario
-                    $.ajax({
-                        url: '/getNotes',
-                        type: 'POST',
-                        data: {
-                            titulo: buscar,
-                        },
-                        success: function (response) {
-                            let resp = JSON.parse(response).map((x) => x.titulo);//Lista de titulos
-                            print(resp);
-                            console.log(resp);
-                        },
-                        error: function (error) {
-                            sugerencias.innerHTML = "<ol><li>" + JSON.parse(error.responseText).error + "</li></ol>";
-                        }
-                    })
-                });
-
-
-
-                function print(data) {
-                    sugerencias.innerHTML = '';
-                    let list = document.createElement("ol");
-                    data.forEach(element => {
-                        let item = document.createElement('li');
-                        item.setAttribute('onclick', 'autoComplete(this.innerHTML)');
-                        let content = document.createTextNode(element);
-                        item.appendChild(content);
-                        list.appendChild(item);
-
-                    });
-                    sugerencias.appendChild(list);
-                }
-            </script>
+            <script src="resources/js/autoComplete.js"></script><!-- Autocomplete script -->
 
         </header>
         <?php
@@ -194,30 +130,7 @@ $this->title = 'Mis Notas';
                     <?php
                 }
                 ?>
-                <script>
-                    /*
-                    SCRIPT PARA BORRAR LAS NOTAS
-                    */
-                    function deleteNote(id) {
-                        $.ajax({
-                            url: '/borrarNota',
-                            type: 'POST',
-                            data: {
-                                id: id,
-                            },
-                            success: function (response) {
-                                //Elimina el elemento del DOM si este es borrado de la BBDD
-                                let element = document.getElementById("Note" + id);
-                                element.remove();
-                                console.log('Elemento borrado');
-                            },
-                            error: function (error) {
-                                location.reload();
-                                console.log('error al borrar');
-                            }
-                        })
-                    }
-                </script>
+                <script src="resources/js/borrarNota.js"></script>
             </section>
             <?php
         } else {

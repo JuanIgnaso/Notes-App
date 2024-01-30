@@ -522,7 +522,7 @@ option{
     flex-direction: column;
     justify-content: space-around;
     padding: 0.75em;
-    border: 2px solid rgba(177, 177, 177, 1);
+    /* border: 2px solid rgba(177, 177, 177, 1); */
     transition: 0.5s;
 
     .actions ol{
@@ -556,8 +556,8 @@ option{
 }
 
 .tape{
-    background-color: rgb(173, 216, 230);
-    border: 2px solid rgb(149, 149, 255);
+    background-color: rgb(124, 197, 221);
+    /* border: 2px solid rgb(149, 149, 255); */
     width: 30%;
     aspect-ratio: 2/1;
     position: absolute;
@@ -568,33 +568,33 @@ option{
 }
 
 .tape_shade{
-    background:linear-gradient(rgb(82, 189, 255),rgb(173, 216, 230));
+    background:linear-gradient(rgb(26, 158, 240),rgb(124, 197, 221));
     height: 30%;
 }
 
 .paused{
     background:lightgray;
-    border:gray 2px solid;
+    /* border:gray 2px solid; */
     position: relative;
 }
 
 .in_progress{
     background:lightyellow;
-    border:goldenrod 2px solid;
+    /* border:goldenrod 2px solid; */
     position: relative;
 
 }
 
 .finished{
     background:lightgreen;
-    border:green 2px solid;
+    /* border:green 2px solid; */
     position: relative;
 
 }
 
 .no_started{
     background:#fff;
-    border: 2px solid rgba(177, 177, 177, 1);
+    /* border: 2px solid rgba(177, 177, 177, 1); */
     position: relative;
 }
 

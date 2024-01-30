@@ -67,7 +67,8 @@ class Notas extends DBmodel
             $parameters['titulo'] = "%" . $this->titulo . "%";
         }
         if (count($parameters) != 0) {
-            $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1");
+            $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
+
             //echo "SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1";
             $statement->execute($parameters);
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -84,6 +85,16 @@ class Notas extends DBmodel
         $statement->bindValue(":id", Application::$app->user->id);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNoteTitleList()
+    {
+        $statement = self::prepare("SELECT titulo FROM " . self::TABLE_NAME . " WHERE titulo LIKE :titulo AND usuario=:usuario ORDER BY 1");
+        $statement->bindValue(":titulo", "%" . $this->titulo . "%");
+        $statement->bindValue(":usuario", Application::$app->user->id);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+
     }
 
     public function primaryKey(): string

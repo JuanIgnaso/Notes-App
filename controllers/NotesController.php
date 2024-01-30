@@ -7,6 +7,7 @@ use app\core\Controller;
 use app\core\middlewares\AuthMiddleware;
 use app\core\middlewares\LoggedMiddleware;
 use app\core\Request;
+use app\models\Estado;
 use app\models\Notas;
 
 class NotesController extends Controller
@@ -21,6 +22,7 @@ class NotesController extends Controller
     public function userNotes(Request $request)
     {
         $model = new Notas();
+        $estados = new Estado();
         $misNotas = $model->getUserNotes();
 
         ###El usuario está buscando algo
@@ -38,6 +40,7 @@ class NotesController extends Controller
         return $this->render('misNotas', [
             'model' => $model,
             'notas' => $misNotas,
+            'estados' => $estados->getAll(),
         ]);
     }
 
@@ -76,7 +79,7 @@ class NotesController extends Controller
         $model = new Notas();
         if ($request->isPost()) {
             $model->loadData($request->getBody());
-            $lista = $model->getAttrList('titulo');
+            $lista = $model->getNoteTitleList();
             if (!$lista || strlen(trim($model->titulo)) == 0) {
                 Application::$app->response->setStatusCode(400);
                 echo json_encode(['error' => 'No se encuentran registros...']);
