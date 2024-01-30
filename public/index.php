@@ -46,6 +46,9 @@ $app->router->post('/borrarNota', [app\controllers\NotesController::class, 'borr
 $app->router->get('/getNotes', [app\controllers\NotesController::class, 'buscarNota']);
 $app->router->post('/getNotes', [app\controllers\NotesController::class, 'buscarNota']);
 
+###MARCAR NOTA COMO IMPORTANTE
+$app->router->get('/marcarImportante', [app\controllers\NotesController::class, 'marcarImportante']);
+$app->router->post('/marcarImportante', [app\controllers\NotesController::class, 'marcarImportante']);
 
 
 $app->run();

@@ -11,10 +11,12 @@ class Notas extends DBmodel
     public string $titulo = '';
     public string $descripcion;
     public int $estado = 1;
-    public int $importante = 0;
+    public $importante;
     public string $usuario;
     public ?array $estados = null;
     const TABLE_NAME = 'Notas';
+
+    private const SELECT_ALL = "SELECT Notas.id,Notas.titulo,Notas.importante,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id ";
 
 
     public function __construct()
@@ -67,7 +69,7 @@ class Notas extends DBmodel
             $parameters['titulo'] = "%" . $this->titulo . "%";
         }
         if (count($parameters) != 0) {
-            $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
+            $statement = self::prepare(self::SELECT_ALL . " WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
 
             //echo "SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1";
             $statement->execute($parameters);
@@ -77,11 +79,22 @@ class Notas extends DBmodel
         }
     }
 
+    public function markImportant(): bool
+    {
+        $mark = $this->importante == 0 ? 1 : 0;
+        $statement = self::prepare("UPDATE " . self::TABLE_NAME . " SET importante=:mark WHERE id=:id AND usuario=:usuario");
+        $statement->bindValue(":mark", $mark);
+        $statement->bindValue(":id", $this->id);
+        $statement->bindValue(":usuario", Application::$app->user->id);
+        $statement->execute();
+        return $statement->rowCount() != 0;
+    }
+
 
     public function getUserNotes()
     {
 
-        $statement = self::prepare("SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE usuario=:id ORDER BY 1");
+        $statement = self::prepare(self::SELECT_ALL . " WHERE usuario=:id ORDER BY 1");
         $statement->bindValue(":id", Application::$app->user->id);
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);

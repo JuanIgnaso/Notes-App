@@ -30,10 +30,6 @@ class NotesController extends Controller
             $body = $request->getBody();
             $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados']]);
 
-            // var_dump($model->estados);
-            foreach ($model->estados as $estado) {
-                echo $estado;
-            }
             $misNotas = $model->getByTitle();
         }
 
@@ -69,6 +65,22 @@ class NotesController extends Controller
             } else {
                 Application::$app->response->setStatusCode(400);
                 Application::$app->session->setFlash('error', 'Error: ' . 'La nota que intentas borrar no existe!');
+                exit;
+            }
+        }
+    }
+
+    public function marcarImportante(Request $request)
+    {
+        $model = new Notas();
+        if ($request->isPost()) {
+            $model->loadData($request->getBody());
+            if ($model->markImportant()) {
+                Application::$app->response->setStatusCode(200);
+                exit;
+            } else {
+                Application::$app->response->setStatusCode(400);
+                echo json_encode(['error' => 'No se ha podido realizar la operación']);
                 exit;
             }
         }

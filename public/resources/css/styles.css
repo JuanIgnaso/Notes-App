@@ -180,6 +180,10 @@ h3{
     font-size: 1.5em;
 }
 
+.importante{
+    color:crimson;
+}
+
 #sidebarMenu{
     background-color: white;
     color:crimson;
@@ -322,6 +326,18 @@ h3{
         display: flex;
         flex-direction: column;
         gap:2em;
+
+        #buscar{
+            background: url('../img/paper_texture.jpg');
+            background-size: 100%;
+            padding:0.5em;
+            font-size: 1.2rem;
+            transition: 0.5s;
+        }
+
+        #buscar:hover{
+            transform: scale(1.2);
+        }
     }
 
     #buscarTitulo{
@@ -532,7 +548,13 @@ option{
         margin:0;
         gap: 1em;
     }
+
+    .markImportant:hover{
+        cursor: pointer;
+    }
 }
+
+
 
 .note:hover{
     transform: scale(1.05);

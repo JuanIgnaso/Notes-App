@@ -118,7 +118,10 @@ $this->title = 'Mis Notas';
                         </div>
                         <footer class="actions">
                             <ol>
-                                <li><span>!</span></li>
+                                <li><span class="markImportant"
+                                        onclick="markAsImportant(<?php echo $nota['importante']; ?>,<?php echo $nota['id']; ?>)"><i
+                                            class="fa-solid fa-circle-exclamation <?php echo $nota['importante'] == 0 ? '' : 'importante'; ?>"></i></span>
+                                </li>
                                 <li><span><strong>
                                             <?php echo $nota['estado']; ?>
                                         </strong></span></li>
@@ -130,6 +133,26 @@ $this->title = 'Mis Notas';
                     <?php
                 }
                 ?>
+                <script>
+                    //Marcar nota como importante
+                    function markAsImportant(mark, noteID) {
+                        $.ajax({
+                            url: '/marcarImportante',
+                            type: 'POST',
+                            data: {
+                                importante: mark,
+                                id: noteID,
+                            },
+                            success: function (response) {
+                                window.location.reload();
+                                console.log('Elemento marcado');
+                            },
+                            error: function (error) {
+                                console.log(JSON.parse(error.responseText).error);
+                            }
+                        });
+                    }
+                </script>
                 <script src="resources/js/borrarNota.js"></script>
             </section>
             <?php
