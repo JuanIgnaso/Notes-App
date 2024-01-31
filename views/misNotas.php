@@ -101,7 +101,7 @@ $this->title = 'Mis Notas';
                 <input type="submit" value="Buscar" id="buscar">
             </form>
 
-            <script src="resources/js/autoComplete.js"></script><!-- Autocomplete script -->
+            <script src="/resources/js/autoComplete.js"></script><!-- Autocomplete script -->
 
         </header>
         <?php
@@ -133,7 +133,9 @@ $this->title = 'Mis Notas';
                                 <li><span><strong>
                                             <?php echo $nota['estado']; ?>
                                         </strong></span></li>
-                                <li><i class="fa-solid fa-wrench"></i></li>
+                                <li><i class="fa-solid fa-wrench modify"
+                                        onclick="editNote(<?php echo $nota['id']; ?>,<?php echo Application::$app->user->id; ?>)"></i>
+                                </li>
                                 <li><span onclick="deleteNote(<?php echo $nota['id']; ?>)">X</span></li>
                             </ol>
                         </footer>
@@ -141,6 +143,21 @@ $this->title = 'Mis Notas';
                     <?php
                 }
                 ?>
+                <script>
+                    let notas = document.querySelectorAll('.note');
+                    //console.log(location.protocol + '//' + location.host + '/');
+                    function editNote(id, user) {
+                        //this.parentElement.parentElement.parentElement.parentElement.classList.toggle('edit');
+                        setTimeout(function () {
+                            /*
+                                location.protocol -> http/https
+                                location.host -> localhost
+                                location.port -> :8080
+                            */
+                            window.location.replace(location.protocol + '//' + location.host + `/misNotas/editarNota?id=${id}&usuario=${user}`);
+                        }, 500);
+                    }
+                </script>
                 <script>
                     //Marcar nota como importante
                     function markAsImportant(mark, noteID) {
@@ -161,7 +178,7 @@ $this->title = 'Mis Notas';
                         });
                     }
                 </script>
-                <script src="resources/js/borrarNota.js"></script>
+                <script src="/resources/js/borrarNota.js"></script>
             </section>
             <?php
         } else {

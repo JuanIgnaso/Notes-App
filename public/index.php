@@ -50,5 +50,9 @@ $app->router->post('/getNotes', [app\controllers\NotesController::class, 'buscar
 $app->router->get('/marcarImportante', [app\controllers\NotesController::class, 'marcarImportante']);
 $app->router->post('/marcarImportante', [app\controllers\NotesController::class, 'marcarImportante']);
 
+###EDITAR NOTA
+$app->router->get('/misNotas/editarNota', [app\controllers\NotesController::class, 'editarNota']);
+$app->router->post('/misNotas/editarNota', [app\controllers\NotesController::class, 'editarNota']);
+
 
 $app->run();

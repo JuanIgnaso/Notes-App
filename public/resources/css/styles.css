@@ -37,6 +37,26 @@ h1,h2,h3,h4,label{
     font-style: normal;
 }
 
+
+/*EDITAR-------------------*/
+#editForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .group label{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input_error{
+        color:red;
+        font-size: 0.9em;
+    }
+}
+/*-------------------------*/
+
+
 /*  MENU USUARIO--------------*/
 #menuUsuario{
     background-size: 100%;
@@ -539,6 +559,7 @@ option{
     flex-direction: column;
     justify-content: space-around;
     padding: 0.75em;
+    left:0;
     /* border: 2px solid rgba(177, 177, 177, 1); */
     transition: 0.5s;
 
@@ -553,6 +574,10 @@ option{
     .markImportant:hover{
         cursor: pointer;
     }
+}
+
+.edit{
+    left:-600%;
 }
 
 

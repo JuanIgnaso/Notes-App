@@ -7,11 +7,11 @@ use app\core\db\DBmodel;
 class Notas extends DBmodel
 {
 
-    public string $id;
+    public string $id = '';
     public string $titulo = '';
     public string $descripcion;
-    public int $estado = 1;
-    public $importante;
+    public string $estado = '1';
+    public string $importante;
     public string $usuario;
     public ?array $estados = null;
     const TABLE_NAME = 'Notas';
@@ -29,11 +29,6 @@ class Notas extends DBmodel
         return parent::save();
     }
 
-    public function tableName(): string
-    {
-        return 'Notas';
-    }
-
     public function delete(): bool
     {
 
@@ -45,6 +40,28 @@ class Notas extends DBmodel
 
     }
 
+    public function update($id)
+    {
+        $attributes = $this->attributes();
+        if (!isset($this->importante)) {
+            $this->importante = 0;
+        }
+
+        $params = array_map(fn($attr) => "$attr=:$attr", $attributes);
+        $statement = self::prepare("UPDATE " . self::TABLE_NAME . " SET " . implode(',', $params) . " WHERE id=:id");
+        foreach ($attributes as $attribute) {
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        return $statement->rowCount() != 0;
+    }
+
+    public function tableName(): string
+    {
+        return 'Notas';
+    }
     public function getByTitle()
     {
         $conditions = [];
@@ -64,14 +81,17 @@ class Notas extends DBmodel
             }
         }
         //Si el usuario ha escrito un titulo
-        if (isset($this->titulo)) {
+        if (isset($this->titulo) && strlen(trim($this->titulo)) != 0) {
             $conditions[] = 'titulo LIKE :titulo';
             $parameters['titulo'] = "%" . $this->titulo . "%";
         }
+        if (isset($this->importante)) {
+            $conditions[] = 'importante = :importante';
+            $parameters['importante'] = $this->importante;
+        }
+
         if (count($parameters) != 0) {
             $statement = self::prepare(self::SELECT_ALL . " WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
-
-            //echo "SELECT Notas.id,Notas.titulo,Notas.descripcion,estado.estado,estado.clase FROM " . self::TABLE_NAME . " LEFT JOIN estado ON " . self::TABLE_NAME . ".estado = estado.id WHERE " . implode(" AND ", $conditions) . " ORDER BY 1";
             $statement->execute($parameters);
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
         } else {
@@ -110,6 +130,15 @@ class Notas extends DBmodel
 
     }
 
+    public function getNote()
+    {
+        $statement = self::prepare("SELECT * FROM " . self::TABLE_NAME . " WHERE id=:id AND usuario=:usuario");
+        $statement->bindValue(":id", $this->id);
+        $statement->bindValue(":usuario", $this->usuario);
+        $statement->execute();
+        return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function primaryKey(): string
     {
         return 'id';
@@ -123,7 +152,7 @@ class Notas extends DBmodel
     public function rules(): array
     {
         return [
-            'titulo' => [self::RULE_REQUIRED, [self::RULE_UNIQUE, 'class' => self::class], [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 70]],
+            'titulo' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 70]],
             'descripcion' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 450]],
             'estado' => [self::RULE_REQUIRED],
         ];

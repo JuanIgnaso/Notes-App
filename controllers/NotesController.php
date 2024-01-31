@@ -15,7 +15,7 @@ class NotesController extends Controller
     public function __construct()
     {
         #restringir a usuarios no loggeados a la zona de notas.
-        $this->registerMiddleware(new AuthMiddleware(['userNotes']));
+        $this->registerMiddleware(new AuthMiddleware(['userNotes', 'editarNota']));
 
     }
 
@@ -28,9 +28,9 @@ class NotesController extends Controller
         ###El usuario está buscando algo
         if ($request->isPost()) {
             $body = $request->getBody();
-            $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados']]);
-
+            $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados'], 'importante' => $body['importante']]);
             $misNotas = $model->getByTitle();
+
         }
 
         return $this->render('misNotas', [
@@ -105,8 +105,34 @@ class NotesController extends Controller
 
     }
 
+    public function editarNota(Request $request)
+    {
+        $model = new Notas();
+        $estados = new Estado();
+        if ($request->isGet()) {
+            $model->loadData($request->getBody());
+            $model->loadData($model->getNote());
+            if (!$model) {
+                echo 'No se ha podido cargar la Nota que buscas, existe realmente?.';
+            }
+        }
+        if ($request->isPost()) {
+            $id = 11;
+            $model->loadData($request->getBody());
+            if ($model->validate() && $model->update($id)) {
+                Application::$app->session->setFlash('success', "Se han aplicado los cambios con éxito!");
+                Application::$app->response->redirect('/misNotas');
+            }
+        }
+        return $this->render('EditarNota', [
+            'estados' => $estados->getAll(),
+            'model' => $model,
+        ]);
+    }
+
     public function inicio(Request $request)
     {
+
         return $this->render('home');
     }
 }
