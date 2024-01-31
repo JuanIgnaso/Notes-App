@@ -40,7 +40,7 @@ class Notas extends DBmodel
 
     }
 
-    public function update($id)
+    public function update()
     {
         $attributes = $this->attributes();
         if (!isset($this->importante)) {
@@ -53,7 +53,7 @@ class Notas extends DBmodel
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
 
-        $statement->bindValue(":id", $id);
+        $statement->bindValue(":id", $this->id);
         $statement->execute();
         return $statement->rowCount() != 0;
     }

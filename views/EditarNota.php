@@ -6,6 +6,7 @@ $this->title = 'Editar Nota';
 <h1>Editar mi nota</h1>
 
 <form action="" method="post" id="editForm">
+    <input type="hidden" name="id" value="<?php echo $model->id; ?>">
     <div class="group">
         <label>
             Titulo

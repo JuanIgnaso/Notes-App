@@ -23,18 +23,21 @@ $config = [
 $app = new Application(dirname(__DIR__), $config);
 
 ###AQUÍ SE DEFINEN LAS RUTAS###
-$app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
-$app->router->get('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
-$app->router->post('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
+/*----------------------------------------------------------------------------*/
 
-###LOGIN/REGISTER
+###PÁGINA INICIO
+$app->router->get('/', [app\controllers\SiteController::class, 'homePage']);
+
+###OPERACIONES DE SESIÓN DE USUARIO(login/register/logout)
 $app->router->get('/register', [app\controllers\AuthController::class, 'register']);
 $app->router->post('/register', [app\controllers\AuthController::class, 'register']);
 $app->router->get('/login', [app\controllers\AuthController::class, 'login']);
 $app->router->post('/login', [app\controllers\AuthController::class, 'login']);
-
-#LOGOUT
 $app->router->get('/logout', [app\controllers\AuthController::class, 'logout']);
+
+###NOTAS DEL USUARIO
+$app->router->get('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
+$app->router->post('/misNotas', [app\controllers\NotesController::class, 'userNotes']);
 
 ###AÑADIR NOTAS
 $app->router->post('/addNota', [app\controllers\NotesController::class, 'crearNota']);

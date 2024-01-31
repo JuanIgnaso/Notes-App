@@ -28,7 +28,7 @@ class NotesController extends Controller
         ###El usuario está buscando algo
         if ($request->isPost()) {
             $body = $request->getBody();
-            $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados'], 'importante' => $body['importante']]);
+            $model->loadData(['titulo' => $body['tituloNota'], 'estados' => $body['estados']]);
             $misNotas = $model->getByTitle();
 
         }
@@ -112,14 +112,15 @@ class NotesController extends Controller
         if ($request->isGet()) {
             $model->loadData($request->getBody());
             $model->loadData($model->getNote());
+
             if (!$model) {
-                echo 'No se ha podido cargar la Nota que buscas, existe realmente?.';
+                Application::$app->session->setFlash('error', 'La nota que intentas editar no existe');
+                Application::$app->response->redirect('/misNotas');
             }
         }
         if ($request->isPost()) {
-            $id = 11;
             $model->loadData($request->getBody());
-            if ($model->validate() && $model->update($id)) {
+            if ($model->validate() && $model->update()) {
                 Application::$app->session->setFlash('success', "Se han aplicado los cambios con éxito!");
                 Application::$app->response->redirect('/misNotas');
             }
