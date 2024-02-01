@@ -47,7 +47,7 @@ $this->title = 'Editar Nota';
         </p>
     </label>
     <label>importante
-        <input type="checkbox" name="importante" id="importante" value="1" <?php echo $model->importante == 1 ? 'checked' : ''; ?>>
+        <input type="checkbox" name="importante" id="importante" value="1" <?php echo $model->importante == '1' ? 'checked' : ''; ?>>
     </label>
     <button type="button"><a href="/misNotas">Cancelar</a></button>
     <input type="submit" value="Aplicar Cambios">

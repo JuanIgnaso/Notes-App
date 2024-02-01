@@ -11,7 +11,7 @@ class Notas extends DBmodel
     public string $titulo = '';
     public string $descripcion;
     public string $estado = '1';
-    public string $importante;
+    public string $importante = '0';
     public string $usuario;
     public ?array $estados = null;
     const TABLE_NAME = 'Notas';
@@ -26,6 +26,9 @@ class Notas extends DBmodel
 
     public function save()
     {
+        if (!isset($this->importante)) {
+            $this->importante = '0';
+        }
         return parent::save();
     }
 
@@ -44,7 +47,7 @@ class Notas extends DBmodel
     {
         $attributes = $this->attributes();
         if (!isset($this->importante)) {
-            $this->importante = 0;
+            $this->importante = '0';
         }
 
         $params = array_map(fn($attr) => "$attr=:$attr", $attributes);
@@ -54,8 +57,8 @@ class Notas extends DBmodel
         }
 
         $statement->bindValue(":id", $this->id);
-        $statement->execute();
-        return $statement->rowCount() != 0;
+        return $statement->execute();
+
     }
 
     public function tableName(): string
@@ -63,6 +66,21 @@ class Notas extends DBmodel
         return 'Notas';
     }
     public function getByTitle()
+    {
+        $conditions = $this->filter()['conditions'];
+        $parameters = $this->filter()['parameters'];
+
+        if (count($parameters) != 0) {
+            $statement = self::prepare(self::SELECT_ALL . " WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
+            $statement->execute($parameters);
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            return $this->getUserNotes();
+        }
+    }
+
+
+    private function filter(): array
     {
         $conditions = [];
         $parameters = [];
@@ -90,13 +108,10 @@ class Notas extends DBmodel
             $parameters['importante'] = $this->importante;
         }
 
-        if (count($parameters) != 0) {
-            $statement = self::prepare(self::SELECT_ALL . " WHERE " . implode(" AND ", $conditions) . " AND  usuario=" . Application::$app->user->id . " ORDER BY 1");
-            $statement->execute($parameters);
-            return $statement->fetchAll(\PDO::FETCH_ASSOC);
-        } else {
-            return $this->getUserNotes();
-        }
+        return [
+            'conditions' => $conditions,
+            'parameters' => $parameters
+        ];
     }
 
     public function markImportant(): bool
