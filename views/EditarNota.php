@@ -3,7 +3,7 @@ use app\core\Application;
 
 $this->title = 'Editar Nota';
 ?>
-<h1>Editar mi nota</h1>
+<h1 class="tituloPagina">Editar mi nota</h1>
 
 <form action="" method="post" id="editForm">
     <input type="hidden" name="id" value="<?php echo $model->id; ?>">
@@ -46,9 +46,25 @@ $this->title = 'Editar Nota';
             <?php echo isset($model->errors['estado']) ? $model->getFirstError('estado') : ''; ?>
         </p>
     </label>
-    <label>importante
+    <label id="markImportant">
+        importante
         <input type="checkbox" name="importante" id="importante" value="1" <?php echo $model->importante == '1' ? 'checked' : ''; ?>>
+        <span class="checkmark"></span>
     </label>
-    <button type="button"><a href="/misNotas">Cancelar</a></button>
-    <input type="submit" value="Aplicar Cambios">
+    <footer>
+        <button type="button"><a href="/misNotas">Cancelar</a></button>
+        <input type="submit" value="Aplicar Cambios">
+    </footer>
+
+
+    <div class="pencil_box">
+        <div id="pencil_wrapper" class="green">
+            <div class="eraser"></div>
+            <div class="sleeve"></div>
+            <div class="shaft"></div>
+            <div class="point"></div>
+            <div class="lead"></div>
+        </div>
+    </div>
+
 </form>

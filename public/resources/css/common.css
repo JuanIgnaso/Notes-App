@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Patrick+Hand&family=Playpen+Sans:wght@100..800&display=swap');
+
+/* Fuente primaria 'Patric Hand', secundaria 'Playpen Sans' */
+/* Cabeceras 'Amtic SC' */
+
+a{
+    text-decoration: none;
+}
+
+body *{
+    box-sizing: border-box;
+    margin:0px;
+    font-family: var(--fuente-texto);
+}
+
+ol,ul,li{
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+h1,h2,h3,h4,label{
+    font-family: var(--fuente-cabeceras);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.tituloPagina{
+    text-align: center;
+}
+
+/* FOOTER ------------------ */
+#footerWeb{
+    border-top:1px solid rgb(0,0,0);
+    margin: auto;
+    margin-top:2em;
+    padding: 1em;
+}
+
+#footer_about{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0.75em;
+
+    i{
+        font-size: 1.35em;
+        color:rgb(0,0,0);
+    }
+
+    h3{
+        font-size: 2em;
+    }
+}
+
+
+#footer-contacts{
+    display: flex;
+    gap: 0.75em;
+    justify-content: center;
+}
+
+/*   --------------   */
+
+
+/*  ALERTA ------------------ */
+
+.alert{
+    background-image:url('../img/paper_texture.jpg');
+    background-size: 100%;
+    text-align: center;
+    color:white;
+}
+
+.background{
+    padding:0.5em;
+}
+
+.success{
+    background-color:rgba(0, 100, 0,0.35);
+}
+
+.warning{
+    background-color:rgba(255,255,0,0.35);
+}
+
+.danger{
+    background-color:rgba(100,0,0,0.35);
+}
+
+/* -------------------------- */
+:root{
+    --fuente-cabeceras:"Amatic SC", sans-serif;
+    --fuente-texto:"Patrick Hand","Playpen Sans", cursive;
+}

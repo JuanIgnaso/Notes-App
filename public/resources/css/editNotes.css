@@ -1,0 +1,335 @@
+
+body{
+background-image: url('../img/wood_planks.jpg');
+background-repeat: no-repeat; 
+background-attachment: fixed;
+overflow-x: hidden;
+}
+
+
+h1{
+    color:white;
+}
+
+
+button,input[type="submit"]{
+    background:linear-gradient(to right,rgba(254, 241, 2,1) 90%,rgba(254, 241, 2,0) );
+border:unset;
+font-size: 1.1em;
+padding:0.25em;
+}
+
+input,textarea{
+    background-color:unset;
+    padding:0.25em;
+    border:unset;
+    font-size: 1.1em;
+    outline: unset;
+}
+
+input:not([type="submit"]):focus,textarea:focus{
+background-color:rgba(0,0,0,0.15);
+}
+/*EDITAR-------------------*/
+#editForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    position:relative;
+    padding-top:2%;
+    gap:1em;
+    background-image: url('../img/paper-note.png');
+    background-repeat: no-repeat; 
+    width: 30%;
+    aspect-ratio: 1/2;
+    background-size: 100%;
+    margin: auto;
+
+
+    label{
+        position:relative;
+    }
+   
+    .group label{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .input_error{
+        color:red;
+        font-size: 0.9em;
+    }
+
+    footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:1rem;
+    }
+}
+
+/* --------CHECKMARK----------- */
+
+#markImportant{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+#markImportant input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border:darkslategrey 3px solid;
+  }
+
+
+  #markImportant input:checked ~ .checkmark {
+    background-color:rgba(0,0,0,0.35);
+  }
+
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "\2713";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    color:white;
+  }
+
+
+/* ---------------------------- */
+
+/*----PENCIL----------------*/
+
+
+#pencil_wrapper{
+    position: absolute;
+    right:0;
+    width: 50px;
+    margin-left: 100px;
+    rotate:45deg;
+    bottom:30%;
+}
+.eraser{
+    position: relative;
+    top: 1px;
+    left: -11px;
+    width: 43px;
+    height: 20px;
+    box-shadow: 0 3px 1px #b57070, 0 -1px 2px #b57070;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    background: linear-gradient(to right,  #cd8282 0%,#f5aaaa 40%,#b96e6e 75%,#b96e6e 100%);
+}
+.sleeve{
+    position: relative;
+    top: 2px;
+    left: -13px;
+    width: 46px;
+    height: 30px;
+    border-radius: 2px;
+    border-bottom: solid thin #2C2C2C;
+    border-right: solid thin #2C2C2C;
+    background: linear-gradient(to right, #867163 0%,#f8e0cb 40%, #eed3be 50%, #4c3b30 100%);
+    z-index: 2;
+}
+.sleeve:before {
+    position: absolute;
+    content: "";
+    top: 8px;
+    left: 5px;
+    width: 34px;
+    height: 8px;
+    border-top: solid 3px rgba(0,0,0,.07);
+    border-bottom: solid 3px rgba(0,0,0,.07);
+    border-radius: 2px;
+}
+.shaft {
+    position: relative;
+    top: 0;
+    width: 21px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 1;
+}
+.shaft:before,
+.shaft:after {
+    position: absolute;
+    content: "";
+    width: 10px;
+}
+.shaft,
+.shaft:before,
+.shaft:after {
+    top: 0;
+    height: 175px;
+}
+.shaft:before {
+    left: -12px;
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 10px;
+}
+.shaft:after {
+    left: 21px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 8px;
+}
+.point {
+    position: relative;
+    top: -2px;
+    left: -12px;
+    width: 0;
+    height: 0;
+    border-top: solid 40px rgba(202,176,147,1);
+    border-right: solid 22.5px rgba(202,176,147,0);
+    border-left: solid 22.5px rgba(202,176,147,0);
+}
+.point:before {
+    position: absolute;
+    content: "";
+    top: -50px;
+    left: -18px;
+    width: 35px;
+    height: 10px;
+    background: rgba(197,173,145,1);
+}
+.point:after {
+    position: absolute;
+    content: "";
+    top: -49px;
+    left: -15px;
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(to right,  rgba(208,181,159,0.65) 0%,rgba(253,231,213,1) 40%,rgba(240,187,162,0.5) 85%,rgba(197,173,145,1) 100%);
+    border-radius: 50% / 0% 0% 80% 80%;
+}
+.lead {
+    position: relative;
+    top: -14px;
+    left: 3px;
+    width: 0;
+    height: 0;
+    border-top: solid 13px #000000;
+    border-right: solid 7px rgba(255,255,255,0);
+    border-left: solid 7px rgba(255,255,255,0);
+    z-index: 1;
+}
+.lead:before {
+    position: absolute;
+    content: "";
+    top: -13px;
+    left: -5px;
+    border-top: solid 10px rgba(255,255,255,.6);
+    border-right: solid 0 rgba(0,255,0,0);
+    border-left: solid 5px rgba(255,255,255,0);
+}
+.lead:after {
+    position: absolute;
+    content: "Ideas";
+    top: -80px;
+    left: -53px;
+    width: 105px;
+    display: block;
+    color: #000000;
+    font: small-caps 14px 'helvetica';
+    text-transform: lowercase;
+    text-align: right;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0px rgba(255,255,255,.35);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+#pencil_wrapper.green .shaft {
+    background-color: #2b8122;
+    border-bottom: solid 6px #2b8122;
+}
+#pencil_wrapper.green .shaft:before {
+    background-color: #75df25;
+    border-right: solid 2px #75df25;
+    border-bottom: solid 4px #75df25;
+    border-left: solid thin #46b100;
+}
+#pencil_wrapper.green .shaft:after {
+    background-color: #1e7605;
+    border-right: solid 1px #0d6504;
+    border-bottom: solid 4px #1e7605;
+    border-left: solid thin #1e7605;
+}
+
+
+/*-------------------------*/
+
+
+/*-------------------------*/
+
+#footerWeb *{
+    color:white !important;
+}
+
+
+#footerWeb{
+    border-top:white 2px solid !important;
+}
+
+@media screen and (max-width: 1300px){
+    
+}
+
+@media screen and (max-width: 900px){
+    #editForm{
+        padding-top:5%;
+        width: 60%; 
+    }
+}
+
+/*PEQUEÑO*/
+@media screen and (max-width: 500px){
+    #editForm{
+        width: 100%; 
+    }
+
+    #pencil_wrapper{
+        position: absolute;
+        right:50%;
+        transform: translate(50%,0%);
+        width: 50px;
+        margin-left: 100px;
+        rotate:90deg;
+        bottom:10%;
+    }
+}

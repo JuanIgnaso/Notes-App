@@ -110,6 +110,8 @@ class NotesController extends Controller
 
     public function editarNota(Request $request)
     {
+
+        $this->setLayout('editNote');
         $model = new Notas();
         $estados = new Estado();
         if ($request->isGet()) {
