@@ -256,7 +256,7 @@ background-color:rgba(0,0,0,0.15);
 }
 .lead:after {
     position: absolute;
-    content: "Ideas";
+    content: "Cambios";
     top: -80px;
     left: -53px;
     width: 105px;

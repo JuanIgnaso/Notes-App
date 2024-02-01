@@ -167,9 +167,19 @@ class Notas extends DBmodel
     public function rules(): array
     {
         return [
-            'titulo' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 70]],
-            'descripcion' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5], [self::RULE_MAX, 'max' => 450]],
-            'estado' => [self::RULE_REQUIRED],
+            'titulo' => [
+                [self::RULE_REQUIRED, 'campo' => 'Titulo'],
+                [self::RULE_MIN, 'campo' => 'Titulo', 'min' => 5],
+                [self::RULE_MAX, 'campo' => 'Titulo', 'max' => 70]
+            ],
+
+            'descripcion' => [
+                [self::RULE_REQUIRED, 'campo' => 'Descripción'],
+                [self::RULE_MIN, 'campo' => 'Descripción', 'min' => 5],
+                [self::RULE_MAX, 'campo' => 'Descripción', 'max' => 450]
+            ],
+
+            'estado' => [[self::RULE_REQUIRED, 'campo' => 'Estado']],
         ];
     }
 }

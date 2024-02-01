@@ -31,7 +31,21 @@ $this->title = 'Mis Notas';
 </aside>
 <main id="main_container">
     <div id="container_inner">
+        <?php
+        if (Application::$app->session->getFlash('errorInsertar')) {
+            ; ?>
+            <div class="alert" style="margin-bottom:1em;">
+                <div class="background danger">
+                    <p>
+                        <?php echo Application::$app->session->getFlash('errorInsertar'); ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
         <header>
+
             <!-- var_dump(Application::$app->user->id); -->
             <form action="/addNota" method="post" id="nuevaNota">
                 <i class="fa-solid fa-thumbtack pin"></i>

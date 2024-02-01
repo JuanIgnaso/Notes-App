@@ -64,7 +64,7 @@ abstract class Model
                     $ruleName = $rule[0];
                 }
                 if ($ruleName === self::RULE_REQUIRED && !$value) {
-                    $this->addErrorForRule($attribute, self::RULE_REQUIRED);
+                    $this->addErrorForRule($attribute, self::RULE_REQUIRED, $rule);
                 }
                 if ($ruleName === self::RULE_WHITE_SPACE && ctype_space($value)) {
                     $this->addErrorForRule($attribute, self::RULE_WHITE_SPACE);
@@ -137,10 +137,10 @@ abstract class Model
     public function errorMessages(): array
     { //Array con los mensajes de error
         return [
-            self::RULE_REQUIRED => 'Este campo es obligatorio',
+            self::RULE_REQUIRED => 'El campo {campo} es obligatorio',
             self::RULE_EMAIL => 'Tienes que escribir un email válido',
-            self::RULE_MIN => 'El largo mínimo debe de ser de {min}',
-            self::RULE_MAX => 'El largo máximo debe de ser de {max}',
+            self::RULE_MIN => 'El largo mínimo de {campo} debe de ser de {min}',
+            self::RULE_MAX => 'El largo máximo de {campo} debe de ser de {max}',
             self::RULE_MATCH => 'Este campo debe de ser igual a <strong>{match}</strong>',
             self::RULE_REGEX => 'Este campo no cumple con el patrón requerido: {text}',
             self::RULE_UNIQUE => 'El valor escrito en <strong>{field}</strong> ya existe',

@@ -51,7 +51,10 @@ class NotesController extends Controller
             if ($model->validate() && $model->save()) {
                 Application::$app->session->setFlash('success', 'Nueva nota ha sido creada');
             } else {
-                Application::$app->session->setFlash('error', 'Error: ' . implode(', ', $model->errors));
+                ###Mostrar errores en alerta
+                $errors = array_map(fn($err) => $err[0], $model->errors);
+
+                Application::$app->session->setFlash('errorInsertar', 'Error: ' . implode(', ', $errors));
             }
             Application::$app->response->redirect('/misNotas');
         }
