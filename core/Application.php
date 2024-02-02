@@ -3,6 +3,7 @@ namespace app\core;
 
 use app\core\db\DataBase;
 use app\core\db\DBmodel;
+use app\models\TokensUsuario;
 use app\models\Usuario;
 
 /**
@@ -38,6 +39,8 @@ class Application
 
     public Cookie $cookie;
 
+    public TokensUsuario $Token;
+
 
     public function __construct($rootPath, array $config)
     {
@@ -51,6 +54,7 @@ class Application
         $this->view = new View();
         $this->cookie = new Cookie();
         $this->db = new DataBase($config['db']);
+        $this->Token = new TokensUsuario();
 
         //Fetch user between page navigation, to access it in any point of the aplication
         $primaryValue = $this->session->get('user');
@@ -107,8 +111,31 @@ class Application
     //  */
     public function logout()
     {
+        if (!self::isGuest()) {
+            $this->Token->borrarTokensUsuario($this->user->id);
+            $this->cookie->delete('remember_me');
+        }
         $this->user = NULL;
         $this->session->remove('user');
+
+    }
+
+    public function isUserLoggedIn(): bool
+    {
+        //Comprobar que el usuario tiene sesion iniciada
+        if (self::$app->user != null) {
+            return true;
+        }
+
+        //Comprobar el token de remember me
+        $token = filter_input(INPUT_COOKIE, 'remember_me', FILTER_SANITIZE_STRING);
+
+        if ($token && self::$app->Token->isTokenValido($token)) {
+            $usuario = self::$app->Token->encontrarUsrPorToken($token);
+            if ($usuario) {
+
+            }
+        }
     }
 
     // /**

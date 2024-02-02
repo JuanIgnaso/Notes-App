@@ -33,7 +33,7 @@ $this->title = 'Login';
         <?php echo $form->field($model, 'password')->passwordField(); ?>
         <div class="formGroup">
             <label for="recordar">Recordar</label>
-            <input type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
+            <input value="checked" type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
         </div>
         <input type="submit" value="Iniciar sesión">
         <span id="capsOn"><strong></strong></span>
