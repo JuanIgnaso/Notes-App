@@ -12,17 +12,7 @@ $this->title = 'Login';
         <div class="formGroup">
             <label>Correo electrónico</label>
             <div class="input-group">
-                <input type="text" id="email" name="email" value="<?php
-                if (isset($_COOKIE['email'])) {
-                    $cookie->get('email');
-                }
-                if (isset($model->email)) {
-                    echo $model->email;
-                } else {
-                    echo '';
-                }
-
-                ?>"><i class="fa-solid fa-pen-fancy pen"></i>
+                <input type="text" id="email" name="email"><i class="fa-solid fa-pen-fancy pen"></i>
             </div>
             <p class="input_error">
                 <?php if (isset($model->errors['email'])) {
@@ -33,7 +23,7 @@ $this->title = 'Login';
         <?php echo $form->field($model, 'password')->passwordField(); ?>
         <div class="formGroup">
             <label for="recordar">Recordar</label>
-            <input value="checked" type="checkbox" name="recordar" id="recordar" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>>
+            <input value="checked" type="checkbox" name="remember_me" id="remember_me">
         </div>
         <input type="submit" value="Iniciar sesión">
         <span id="capsOn"><strong></strong></span>

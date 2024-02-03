@@ -56,6 +56,8 @@ class Application
         $this->db = new DataBase($config['db']);
         $this->Token = new TokensUsuario();
 
+        $this->recoverUserSesion(); //Recupera la sesión si la cookie 'remember me' existe en el navegador
+
         //Fetch user between page navigation, to access it in any point of the aplication
         $primaryValue = $this->session->get('user');
         if ($primaryValue) {
@@ -86,16 +88,26 @@ class Application
         }
     }
 
-    // public function getController(): Controller
-    // {
-    //     return $this->controller;
-    // }
-
-
-    // public function setController(Controller $controller): void
-    // {
-    //     $this->controller = $controller;
-    // }
+    /**
+     * Recupera la sesión del usuario cada vez que se abra el navegador
+     * o inicie el servidor, si este ha marcado la casilla de 'remember_me'
+     */
+    public function recoverUserSesion()
+    {
+        #se comprueba que existe la cookie
+        if (isset($_COOKIE['remember_me'])) {
+            $usuario = $this->Token->encontrarUsrPorToken($_COOKIE['remember_me']);
+            /*
+            si el resultado de 'encontrarUsrPorToken()' es distinto de falso, osea que el usuario 
+            tiene token, se inicia sesión.
+            */
+            if ($usuario != false) {
+                $userModel = new Usuario();
+                $usuario = $userModel->findOne(['id' => $usuario['id']]);
+                $this->login($usuario);
+            }
+        }
+    }
 
     public function login(Usuario $user)
     {
@@ -111,12 +123,15 @@ class Application
     //  */
     public function logout()
     {
-        if (!self::isGuest()) {
+
+        if ($this->isUserLoggedIn()) {
+            //borrar el token del usuario
             $this->Token->borrarTokensUsuario($this->user->id);
+            $this->user = NULL;
+            $this->session->remove('user');
             $this->cookie->delete('remember_me');
         }
-        $this->user = NULL;
-        $this->session->remove('user');
+
 
     }
 
@@ -133,9 +148,10 @@ class Application
         if ($token && self::$app->Token->isTokenValido($token)) {
             $usuario = self::$app->Token->encontrarUsrPorToken($token);
             if ($usuario) {
-
+                return $this->login($usuario);
             }
         }
+        return false;
     }
 
     // /**

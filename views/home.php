@@ -4,7 +4,6 @@ use app\core\Application;
 $this->title = 'Inicio';
 ?>
 
-
 <div id="menuUsuario">
     <ol>
         <?php

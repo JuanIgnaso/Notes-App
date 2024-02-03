@@ -65,12 +65,14 @@ class AuthController extends Controller
 
             if ($formModel->validate() && $formModel->login()) {
 
-                //
-                if (isset($body['recordar'])) {
-                    $cookie->create('email', $body['email'], time() + (86400 * 30));
-                } else {
-                    $cookie->delete('email');
+                //Crear token para usuario si este marca la casilla de 'remember_me'
+                //try {
+                if (isset($body['remember_me'])) {
+                    $this->remember_me(Application::$app->user->id);
                 }
+                //} catch (\Exception $e) {
+                // echo 'Message: ' . $e->getMessage();
+                //}
                 //
                 $response->redirect('/');
             }
@@ -87,7 +89,7 @@ class AuthController extends Controller
     }
 
 
-    function remember_me(int $user_id, int $day = 30)
+    function remember_me($user_id, int $day = 30)
     {
         $tokenModel = new TokensUsuario();
         $cookie = new Cookie();

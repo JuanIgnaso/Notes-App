@@ -2,10 +2,12 @@
 
 namespace app\models;
 
+use app\core\Application;
+
 
 class TokensUsuario
 {
-    const TABLE_NAME = 'tokensUsuario';
+    const TABLE_NAME = 'usuariosToken';
 
 
     /**
@@ -50,10 +52,10 @@ class TokensUsuario
     function insertarTokenUsuario($id_usuario, $selector, $hashed_validator, $fecha_caducidad)
     {
         //query
-        $statement = self::prepare("INSERT INTO " . self::TABLE_NAME . "(id_usuario,selector,hashed_validator,caducidad) VALUES(:usuario,:selector,:hashed_validator,:fecha_caducidad)");
-        $statement->bindValue(":usuario", $id_usuario);
+        $statement = self::prepare("INSERT INTO " . self::TABLE_NAME . "(selector,hashed_validator,id_usuario,caducidad) VALUES(:selector,:hashed_validator,:usuario,:fecha_caducidad)");
         $statement->bindValue(":selector", $selector);
         $statement->bindValue(":hashed_validator", $hashed_validator);
+        $statement->bindValue(":usuario", $id_usuario);
         $statement->bindValue(":fecha_caducidad", $fecha_caducidad);
         return $statement->execute();
     }
@@ -107,7 +109,7 @@ class TokensUsuario
             return null;
         }
 
-        $sql = 'SELECT usuarios.id, nombre
+        $sql = 'SELECT usuarios.*
             FROM usuarios
             INNER JOIN usuariosToken ON id_usuario = usuarios.id
             WHERE selector = :selector AND

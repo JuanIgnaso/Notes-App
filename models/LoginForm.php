@@ -13,7 +13,6 @@ class LoginForm extends Model
 
     public function login()
     {
-        $remember = false;
         $model = new Usuario();
         $usuario = $model->findOne(['email' => $this->email]);
 
@@ -22,8 +21,6 @@ class LoginForm extends Model
             $this->addError('email', 'No existe actualmente ningún usuario con este email');
             return false;
         }
-        //Comprobar si tiene marcado o no el remember me y si tiene o no token.
-        //Si no está marcado hacer lo del password_verify
         if (password_verify($this->password, $usuario->password)) {
             return Application::$app->login($usuario);
         } else {
