@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBmodel;
-use app\core\Model;
-use app\core\UserModel;
+use juanignaso\phpmvc\framework\db\DBmodel;
 
 class Usuario extends DBmodel
 {

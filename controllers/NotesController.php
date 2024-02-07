@@ -2,11 +2,11 @@
 
 namespace app\controllers;
 
-use app\core\Application;
-use app\core\Controller;
-use app\core\middlewares\AuthMiddleware;
+use juanignaso\phpmvc\framework\Application;
+use juanignaso\phpmvc\framework\Controller;
+use juanignaso\phpmvc\framework\middlewares\AuthMiddleware;
 use app\core\middlewares\LoggedMiddleware;
-use app\core\Request;
+use juanignaso\phpmvc\framework\Request;
 use app\models\Estado;
 use app\models\Notas;
 

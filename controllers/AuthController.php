@@ -2,16 +2,14 @@
 
 namespace app\controllers;
 
-use app\core\Controller;
-use app\core\Cookie;
-use app\core\middlewares\AuthMiddleware;
-use app\core\middlewares\LoggedMiddleware;
-use app\core\Request;
-use app\core\Response;
+use juanignaso\phpmvc\framework\Controller;
+use juanignaso\phpmvc\framework\middlewares\LoggedMiddleware;
+use juanignaso\phpmvc\framework\Request;
+use juanignaso\phpmvc\framework\Response;
 use app\models\LoginForm;
-use app\models\TokensUsuario;
+use juanignaso\phpmvc\framework\Token;
 use app\models\Usuario;
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 class AuthController extends Controller
 {
@@ -58,7 +56,6 @@ class AuthController extends Controller
         $this->setLayout('loginRegisterForm');
         $body = $request->getBody();
         $formModel = new LoginForm();
-        $cookie = new Cookie();
 
         if ($request->isPost()) {
             $formModel->loadData($request->getBody());
@@ -82,7 +79,6 @@ class AuthController extends Controller
             'login',
             [
                 'model' => $formModel,
-                'cookie' => $cookie,
                 'body' => $body,
             ]
         );
@@ -91,8 +87,7 @@ class AuthController extends Controller
 
     function remember_me($user_id, int $day = 30)
     {
-        $tokenModel = new TokensUsuario();
-        $cookie = new Cookie();
+        $tokenModel = new Token();
 
         [$selector, $validator, $token] = $tokenModel->generate_tokens();
 
@@ -107,7 +102,7 @@ class AuthController extends Controller
         $expiry = date('Y-m-d H:i:s', $expired_seconds);
 
         if ($tokenModel->insertarTokenUsuario($user_id, $selector, $hash_validator, $expiry)) {
-            $cookie->create('remember_me', $token, $expired_seconds);
+            setcookie('remember_me', $token, $expired_seconds);
         }
     }
 

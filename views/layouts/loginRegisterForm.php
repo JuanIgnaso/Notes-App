@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 ?>
 

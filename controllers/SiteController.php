@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\core\Controller;
+use juanignaso\phpmvc\framework\Controller;
 
 class SiteController extends Controller
 {

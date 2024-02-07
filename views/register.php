@@ -1,13 +1,12 @@
 <?php
-use app\core\Application;
-use app\core\Cookie;
+use juanignaso\phpmvc\framework\form\Form;
 
 $this->title = 'Registrarse';
 ?>
 <h1 class="tituloPagina">Registrar Nuevo Usuario</h1>
 <main class="main-login-register">
     <div class="main-login-register-inner">
-        <?php $form = app\core\form\Form::begin('', 'post'); ?>
+        <?php $form = Form::begin('', 'post'); ?>
         <i class="fa-solid fa-map-pin login-pin"></i>
         <?php echo $form->field($model, 'nombre'); ?>
         <?php echo $form->field($model, 'email'); ?>
@@ -16,6 +15,6 @@ $this->title = 'Registrarse';
         <span id="capsOn"><strong></strong></span>
         <input type="submit" value="Registrar Cuenta">
         <script src="/resources/js/isCapsOn.js"></script> <!-- Muestra mensaje cuando las maýusc están activadas -->
-        <?php app\core\form\Form::end(); ?>
+        <?php Form::end(); ?>
     </div>
 </main>

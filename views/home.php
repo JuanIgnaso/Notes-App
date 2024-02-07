@@ -1,5 +1,5 @@
 <?php
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 $this->title = 'Inicio';
 ?>

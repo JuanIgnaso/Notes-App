@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 
 class TokensUsuario

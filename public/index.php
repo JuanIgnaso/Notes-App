@@ -7,7 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 //Configuraciones
 $config = [

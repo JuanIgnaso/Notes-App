@@ -3,7 +3,8 @@
     "description": "simple mvc notes app",
     "type": "project",
     "require": {
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+        "juanignaso/php-mcv-framework": "^1.0"
     },
     "autoload": {
         "psr-4": {

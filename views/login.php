@@ -1,5 +1,5 @@
 <?php
-use app\core\Application;
+use juanignaso\phpmvc\framework\Application;
 
 $this->title = 'Login';
 ?>
@@ -7,7 +7,7 @@ $this->title = 'Login';
 <main class="main-login-register">
     <div class="main-login-register-inner">
 
-        <?php $form = app\core\form\Form::begin('', 'post'); ?>
+        <?php $form = juanignaso\phpmvc\framework\form\Form::begin('', 'post'); ?>
         <i class="fa-solid fa-map-pin login-pin"></i>
         <div class="formGroup">
             <label>Correo electrónico</label>
@@ -28,7 +28,7 @@ $this->title = 'Login';
         <input type="submit" value="Iniciar sesión">
         <span id="capsOn"><strong></strong></span>
         <script src="/resources/js/isCapsOn.js"></script> <!-- Muestra mensaje cuando las maýusc están activadas -->
-        <?php app\core\form\Form::end(); ?>
+        <?php juanignaso\phpmvc\framework\form\Form::end(); ?>
 
     </div>
 

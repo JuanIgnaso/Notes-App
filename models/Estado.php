@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\core\db\DBmodel;
+use juanignaso\phpmvc\framework\db\DBmodel;
 
 class Estado extends DBmodel
 {

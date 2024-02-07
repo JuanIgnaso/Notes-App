@@ -1,8 +1,8 @@
 <?php
 namespace app\models;
 
-use app\core\Application;
-use app\core\db\DBmodel;
+use juanignaso\phpmvc\framework\Application;
+use juanignaso\phpmvc\framework\db\DBmodel;
 
 class Notas extends DBmodel
 {
