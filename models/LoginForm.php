@@ -4,6 +4,7 @@ namespace app\models;
 
 use juanignaso\phpmvc\framework\Application;
 use juanignaso\phpmvc\framework\Model;
+use juanignaso\phpmvc\framework\Usuario;
 
 class LoginForm extends Model
 {
@@ -33,11 +34,11 @@ class LoginForm extends Model
     {
         return [
             'email' => [
-                [self::RULE_REQUIRED, 'campo' => 'Email'],
+                [self::RULE_REQUIRED, 'campo' => $this->getLabel('email')],
                 self::RULE_EMAIL
             ],
             'password' => [
-                [self::RULE_REQUIRED, 'campo' => 'Contraseña']
+                [self::RULE_REQUIRED, 'campo' => $this->getLabel('password')]
             ],
         ];
     }

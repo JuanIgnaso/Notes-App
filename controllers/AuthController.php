@@ -8,7 +8,7 @@ use juanignaso\phpmvc\framework\Request;
 use juanignaso\phpmvc\framework\Response;
 use app\models\LoginForm;
 use juanignaso\phpmvc\framework\Token;
-use app\models\Usuario;
+use juanignaso\phpmvc\framework\Usuario;
 use juanignaso\phpmvc\framework\Application;
 
 class AuthController extends Controller

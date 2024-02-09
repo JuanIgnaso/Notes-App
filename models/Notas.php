@@ -168,18 +168,27 @@ class Notas extends DBmodel
     {
         return [
             'titulo' => [
-                [self::RULE_REQUIRED, 'campo' => 'Titulo'],
+                [self::RULE_REQUIRED, 'campo' => $this->getLabel('titulo')],
                 [self::RULE_MIN, 'campo' => 'Titulo', 'min' => 5],
                 [self::RULE_MAX, 'campo' => 'Titulo', 'max' => 70]
             ],
 
             'descripcion' => [
-                [self::RULE_REQUIRED, 'campo' => 'Descripción'],
+                [self::RULE_REQUIRED, 'campo' => $this->getLabel('descripcion')],
                 [self::RULE_MIN, 'campo' => 'Descripción', 'min' => 5],
                 [self::RULE_MAX, 'campo' => 'Descripción', 'max' => 450]
             ],
 
-            'estado' => [[self::RULE_REQUIRED, 'campo' => 'Estado']],
+            'estado' => [[self::RULE_REQUIRED, 'campo' => $this->getLabel('estado')]],
+        ];
+    }
+
+    public function labels(): array
+    {
+        return [
+            'titulo' => 'Titulo',
+            'estado' => 'Estado',
+            'descripcion' => 'Descripción',
         ];
     }
 }

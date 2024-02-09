@@ -1,5 +1,5 @@
 <?php
-use app\models\Usuario;
+use juanignaso\phpmvc\framework\Usuario;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
