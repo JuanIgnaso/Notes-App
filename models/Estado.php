@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use juanignaso\phpmvc\framework\db\DBmodel;
+use juanignaso\phpmvc\framework\db\DBModel;
 
-class Estado extends DBmodel
+class Estado extends DBModel
 {
 
     public string $id;

@@ -70,16 +70,16 @@
         },
         {
             "name": "juanignaso/php-mcv-framework",
-            "version": "v1.0.3.4",
+            "version": "v1.0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JuanIgnaso/php-mvc-framework.git",
-                "reference": "e178db99cfef5ef112618694a2e8db609d8ec5a5"
+                "reference": "0cff5864c23343956539821c044e1ae01a90ff21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JuanIgnaso/php-mvc-framework/zipball/e178db99cfef5ef112618694a2e8db609d8ec5a5",
-                "reference": "e178db99cfef5ef112618694a2e8db609d8ec5a5",
+                "url": "https://api.github.com/repos/JuanIgnaso/php-mvc-framework/zipball/0cff5864c23343956539821c044e1ae01a90ff21",
+                "reference": "0cff5864c23343956539821c044e1ae01a90ff21",
                 "shasum": ""
             },
             "type": "library",
@@ -97,9 +97,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JuanIgnaso/php-mvc-framework/issues",
-                "source": "https://github.com/JuanIgnaso/php-mvc-framework/tree/v1.0.3.4"
+                "source": "https://github.com/JuanIgnaso/php-mvc-framework/tree/v1.0.3.5"
             },
-            "time": "2024-02-08T16:59:24+00:00"
+            "time": "2024-02-09T15:09:28+00:00"
         },
         {
             "name": "phpoption/phpoption",

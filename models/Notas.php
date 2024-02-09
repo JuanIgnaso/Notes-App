@@ -2,9 +2,9 @@
 namespace app\models;
 
 use juanignaso\phpmvc\framework\Application;
-use juanignaso\phpmvc\framework\db\DBmodel;
+use juanignaso\phpmvc\framework\db\DBModel;
 
-class Notas extends DBmodel
+class Notas extends DBModel
 {
 
     public string $id = '';
