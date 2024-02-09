@@ -24,7 +24,15 @@ En la sección de **filtros** dentro de `/misNotas` puedes filtrar por:
 También puedes modificar su cotenido o borrarlas si no las consideras necesarias o has terminado lo que tenías apuntado en ellas.
 
 ## Requisitos
-Tener PHP 8 instalado, manejador de paquetes Composer y un servidor MYSQL.
+Solo precisas tener **Docker** o **Docker Desktop** instalado para correr o probar esta aplicación.
+
+## Como usarla
+Clona el repositorio en tu carpeta de preferencia y dentro de la carpeta raíz del proyecto ejecuta el siguiente comando:
+```
+docker compose up -d
+```
+Docker te construirá una imagen con un sencillo servicio PHP-Apache y un MYSQL con la Base de Datos para poder usarla.
+
 
 ### Servidor MYSQL
 También puedes probar y usar una imagen de Docker que he subido que debería contener un servidor mysql junto con la Base de Datos necesaria, la puedes encontrar
