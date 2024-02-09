@@ -38,11 +38,6 @@ docker compose exec app composer install
 
 Docker te construirá una imagen con un sencillo servicio PHP-Apache y un MYSQL con la Base de Datos para poder usarla.
 
-
-### Servidor MYSQL
-También puedes probar y usar una imagen de Docker que he subido que debería contener un servidor mysql junto con la Base de Datos necesaria, la puedes encontrar
-en Docker escribiendo `juanignaso/notesapp-mysql-server` en el buscador de imágenes.
-
 ## Recursos Usados
  [JQuery](https://releases.jquery.com/)
 
