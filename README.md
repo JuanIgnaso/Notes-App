@@ -31,6 +31,11 @@ Clona el repositorio en tu carpeta de preferencia y dentro de la carpeta raíz d
 ```
 docker compose up -d
 ```
+Si la app te da error de que no tiene composer instalado, ejecuta el siguiente comando a continuación dentro de la carpeta raíz:
+```
+docker compose exec app composer install
+```
+
 Docker te construirá una imagen con un sencillo servicio PHP-Apache y un MYSQL con la Base de Datos para poder usarla.
 
 
